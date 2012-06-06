@@ -1,30 +1,30 @@
 [submodule "bundle/nerdcommenter"]
-	path = bundle/nerdcommenter
+	path = vim/bundle/nerdcommenter
 	url = https://github.com/scrooloose/nerdcommenter.git
 [submodule "bundle/snipmate"]
-	path = bundle/snipmate
+	path = vim/bundle/snipmate
 	url = https://github.com/msanders/snipmate.vim.git
 [submodule "bundle/nerdtree"]
-	path = bundle/nerdtree
+	path = vim/bundle/nerdtree
 	url = https://github.com/scrooloose/nerdtree.git
 [submodule "bundle/tabular"]
-	path = bundle/tabular
+	path = vim/bundle/tabular
 	url = https://github.com/godlygeek/tabular.git
 [submodule "bundle/indent-guides"]
-	path = bundle/indent-guides
+	path = vim/bundle/indent-guides
 	url = https://github.com/nathanaelkane/vim-indent-guides.git
 [submodule "bundle/delimitMate"]
-	path = bundle/delimitMate
+	path = vim/bundle/delimitMate
 	url = https://github.com/Raimondi/delimitMate.git
 [submodule "bundle/AutoComplPop"]
-	path = bundle/AutoComplPop
+	path = vim/bundle/AutoComplPop
 	url = https://github.com/vim-scripts/AutoComplPop.git
 [submodule "bundle/OmniCppComplete"]
-	path = bundle/OmniCppComplete
+	path = vim/bundle/OmniCppComplete
 	url = https://github.com/vim-scripts/OmniCppComplete.git
 [submodule "bundle/guicolorscheme"]
-	path = bundle/guicolorscheme
+	path = vim/bundle/guicolorscheme
 	url = https://github.com/thinca/vim-guicolorscheme.git
 [submodule "bundle/syntastic"]
-	path = bundle/syntastic
+	path = vim/bundle/syntastic
 	url = https://github.com/scrooloose/syntastic.git
