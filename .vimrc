@@ -1,4 +1,4 @@
-" Jason Tsao's VIMRC file "
+"awesomepanda Jason Tsao's VIMRC file "
 
 " Configuration Variables
     set tw=80               " Default textwidth
@@ -43,19 +43,21 @@
             \ setlocal autoindent expandtab tabstop=8 softtabstop=2 shiftwidth=2
             \ textwidth=76 wrap formatoptions=tcqn
             \ comments=s1:/*,ex:*/,://,b:#,:%,:XCOMM,fb:-,fb:*,fb:+,fb:.,fb:>
+    " Turn off smartindent for python because it just ain't smart
+    au! FileType python setl nosmartindent
 
 " This enables auto semicolon for languages that require it
 " If there isn't one, append a semi colon to the end of the current line.
-    function s:appendSemiColon()
-        if getline(';') !~ ';$'
-            let original_cursor_position = getpos('.')
-            exec("s/$/;/")
-            call setpos('.', original_cursor_position)
-        endif
-    endfunction
+    "function s:appendSemiColon()
+        "if getline(';') !~ ';$'
+            "let original_cursor_position = getpos('.')
+            "exec("s/$/;/")
+            "call setpos('.', original_cursor_position)
+        "endif
+    "endfunction
 
 " For auto semicolon
-    noremap ; :s/\([^;]\)$/\1;/<cr>:nohls<cr>
+    "noremap ; :s/\([^;]\)$/\1;/<cr>:nohls<cr>
 
 " For programming languages using a semi colon at the end of statement.
     autocmd FileType c,cpp,css,java,javascript,perl,php
@@ -78,14 +80,15 @@
 " Type ,v for easy access to vimrc editting
     nmap <leader>v :tabedit $MYVIMRC<CR>
 
-
-" Change the default colorscheme
-    colorscheme wombat256
-
 " Set 256 color mode
     set t_Co=256
     syntax enable
-    "set background=dark
+    let g:solarized_termtrans = 1
+    set background=dark
+
+" Change the default colorscheme
+" sy
+    colorscheme wombat256
 
 " Plugins
     " For Tabbar, assign a key to toggleConsole
@@ -104,12 +107,11 @@
     " NERDTree
         " Map toggle to Ctrl-e
         map <C-e> :NERDTreeToggle<CR>
-        autocmd VimEnter * NERDTree                             " Open NERDTree automatically
-        autocmd VimEnter * wincmd w                             " Place cursor in the correct window
-        autocmd VimEnter * if !argc() | NERDTree | endif        " Open NERDTree if no files specified
+        "autocmd VimEnter * NERDTree                             " Open NERDTree automatically
+        "autocmd VimEnter * wincmd w                             " Place cursor in the correct window
+        "autocmd VimEnter * if !argc() | NERDTree | endif        " Open NERDTree if no files specified
         " Close vim if the only window left open is NERDTree
         autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
-
 
     " Indent-guides
         " Make the indent-guide colors work with 256 xterm 
