@@ -1,4 +1,4 @@
-"awesomepanda Jason Tsao's VIMRC file "
+" Jason Tsao's VIMRC file "
 
 " Configuration Variables
     set tw=80               " Default textwidth
