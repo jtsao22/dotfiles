@@ -104,7 +104,12 @@
 
     " Snipmate
         " Update snippets on the fly
-        nmap ,rr :call ReloadSnippets(snippets_dir, &filetype)<CR>
+        " nmap ,rr :call ReloadSnippets(snippets_dir, &filetype)<CR>
+
+    " Ultisnips
+        let g:UltiSnipsExpandTrigger="<tab>"
+        let g:UltiSnipsJumpForwardTrigger="<tab>"
+        let g:UltiSnipsJumpBackwardTrigger="<s-tab>" 
 
     " NERDTree
         " Map toggle to Ctrl-e
