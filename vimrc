@@ -107,9 +107,9 @@
         " nmap ,rr :call ReloadSnippets(snippets_dir, &filetype)<CR>
 
     " Ultisnips
-        let g:UltiSnipsExpandTrigger="<tab>"
-        let g:UltiSnipsJumpForwardTrigger="<tab>"
-        let g:UltiSnipsJumpBackwardTrigger="<s-tab>" 
+        let g:UltiSnipsExpandTrigger="<c-j>"
+        let g:UltiSnipsJumpForwardTrigger="<c-j>"
+        let g:UltiSnipsJumpBackwardTrigger="<c-k>" 
 
     " NERDTree
         " Map toggle to Ctrl-e
@@ -146,8 +146,10 @@
         au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
         set completeopt=menuone,menu,longest,preview"
 
-    " Jedi 
-        let g:jedi#auto_initialization = 0
+    " YouCompleteMe
+    let g:ycm_global_ycm_extra_conf = '/home/jtsao22/.ycm_extra_confg.py'
+    let g:ycm_confirm_extra_conf = 0
+    "let g:ycm_extra_conf_globlist = ['~/wrk-manx/*']
 
 " Aliases
     command Man :vsp ~/LabSense/open-zwave/cpp/src/Manager.cpp

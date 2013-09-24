@@ -35,7 +35,19 @@ else
     #export OpenCV_DIR=/shimmer/3rdparty/share/OpenCV/
 
     ## Openni directory
-    #export OPENNI_DIR=/home/jtsao22/Documents/src/OpenNI-Linux-x64-2.2
+    source ~/Documents/src/OpenNI-Linux-x64-2.2/OpenNIDevEnvironment
+    source ~/Documents/src/NiTE-Linux-x64-2.2/NiTEDevEnvironment
+
+    export OPENNI_ARM_DIR=/home/jtsao22/Documents/src/OpenNI-Linux-Arm-2.2
+    export OPENNI2_ARM_INCLUDE=$OPENNI_ARM_DIR/Include
+    export OPENNI2_ARM_REDIST=$OPENNI_ARM_DIR/Redist
+    export NITE2_ARM_DIR=/home/jtsao22/Documents/src/NiTE-Linux-x86-2.2
+    export NITE2_ARM_INCLUDE=$NITE2_ARM_DIR/Include
+    export NITE2_ARM_REDIST=$NITE2_ARM_DIR/Redist
+
+    export OPENNI_DIR=/home/jtsao22/Documents/src/OpenNI-Linux-x64-2.2
+    export NITE2_DIR=/home/jtsao22/Documents/src/NiTE-Linux-x64-2.2
+    export LD_LIBRARY_PATH=$OPENNI_DIR/Redist:$NITE2_DIR/Redist
     #export OPENNI2_INCLUDE=$OPENNI_DIR/Include/
     #export OPENNI2_REDIST=$OPENNI_DIR/Redist/
 
@@ -55,10 +67,10 @@ export TERM=xterm-256color
 export ARCH=arm
 #export CROSS_COMPILE=arm-none-gnueabi-
 export CROSS_COMPILE=/home/jtsao22/CodeSourcery/Sourcery_CodeBench_Lite_for_ARM_GNU_Linux/bin/arm-none-linux-gnueabi-
-export PLATFORM=tate
+#export PLATFORM=tate
 
 # Set up manx libraries
-export LD_LIBRARY_PATH=/home/jtsao22/wrk-manx/manx/_build/x64/install/lib
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/home/jtsao22/wrk-manx/manx/_build/x64/install/lib
 
 # Load Bash It
 source $BASH_IT/bash_it.sh
