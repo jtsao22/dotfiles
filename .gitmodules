@@ -46,3 +46,9 @@
 [submodule "vim/bundle/auto_pairs"]
 	path = vim/bundle/auto_pairs
 	url = https://github.com/jiangmiao/auto-pairs.git
+[submodule "vim/bundle/easytags"]
+	path = vim/bundle/easytags
+	url = https://github.com/xolox/vim-easytags.git
+[submodule "vim/bundle/misc_for_easytags"]
+	path = vim/bundle/misc_for_easytags
+	url = https://github.com/xolox/vim-misc.git
