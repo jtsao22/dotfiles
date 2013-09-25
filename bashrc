@@ -44,6 +44,8 @@ else
     export NITE2_ARM_DIR=/home/jtsao22/Documents/src/NiTE-Linux-x86-2.2
     export NITE2_ARM_INCLUDE=$NITE2_ARM_DIR/Include
     export NITE2_ARM_REDIST=$NITE2_ARM_DIR/Redist
+    export ARM_CXX=/usr/bin/arm-linux-gnueabihf-g++ 
+    export ARM_STAGING=Bin
 
     export OPENNI_DIR=/home/jtsao22/Documents/src/OpenNI-Linux-x64-2.2
     export NITE2_DIR=/home/jtsao22/Documents/src/NiTE-Linux-x64-2.2
