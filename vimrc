@@ -92,6 +92,9 @@
     colorscheme jellybeans
     "let g:jellybeans_use_lowcolor_black = 1
 
+" Set tag file
+    set tags=/home/jtsao22/.vimtags
+
 " Plugins
     " For Tagbar, assign a key to toggleConsole
         nnoremap <silent> <C-L> :TagbarToggle<CR>
@@ -150,7 +153,5 @@
     let g:ycm_global_ycm_extra_conf = '/home/jtsao22/.ycm_extra_confg.py'
     let g:ycm_confirm_extra_conf = 0
     "let g:ycm_extra_conf_globlist = ['~/wrk-manx/*']
+    
 
-" Aliases
-    command Man :vsp ~/LabSense/open-zwave/cpp/src/Manager.cpp
-    command Ma !make && ./ss3.sh

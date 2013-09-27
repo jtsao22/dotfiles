@@ -52,3 +52,6 @@
 [submodule "vim/bundle/misc_for_easytags"]
 	path = vim/bundle/misc_for_easytags
 	url = https://github.com/xolox/vim-misc.git
+[submodule "dircolors"]
+	path = dircolors
+	url = https://github.com/seebi/dircolors-solarized.git
