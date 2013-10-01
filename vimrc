@@ -46,23 +46,9 @@
     " Turn off smartindent for python because it just ain't smart
     au! FileType python setl nosmartindent
 
-" This enables auto semicolon for languages that require it
-" If there isn't one, append a semi colon to the end of the current line.
-    "function s:appendSemiColon()
-        "if getline(';') !~ ';$'
-            "let original_cursor_position = getpos('.')
-            "exec("s/$/;/")
-            "call setpos('.', original_cursor_position)
-        "endif
-    "endfunction
-
-" For auto semicolon
-    noremap ; :s/\([^;]\)$/\1;/<cr>:nohls<cr>
-
 " For programming languages using a semi colon at the end of statement.
     autocmd FileType c,cpp,css,java,javascript,perl,php
         \ noremap ; :s/\([^;]\)$/\1;/<cr>:nohls<cr>
-        "\ nmap <silent> <Leader>; :call <SID>appendSemiColon()<cr>
 
 " save sessions with .vis extension
     map <leader>s :mksession!  session.vis<CR>
