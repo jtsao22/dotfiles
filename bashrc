@@ -10,10 +10,6 @@ export BASH_IT=$HOME/.bash_it
 # location /.bash_it/themes/
 export BASH_IT_THEME='clean'
 
-# Set my editor and git editor
-export EDITOR="/usr/bin/vim "
-export GIT_EDITOR='/usr/bin/vim'
-
 # Customize to your needs...  
 export PATH=$PATH:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 

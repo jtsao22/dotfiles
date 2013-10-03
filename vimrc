@@ -57,7 +57,7 @@
     au BufRead *.vis so %
 
 " Automatically change to the current directory that the file is located in.
-    autocmd BufEnter * silent! lcd %:p:h
+    "autocmd BufEnter * silent! lcd %:p:h
 
 " Source vimrc file after saving it
     if has("autocmd")
