@@ -79,9 +79,6 @@
     colorscheme solarized
     "let g:jellybeans_use_lowcolor_black = 1
 
-" Set tag file
-    set tags=/home/jtsao22/.vimtags
-
 " Plugins
     
     " Pathogen support
