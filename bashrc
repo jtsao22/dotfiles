@@ -33,7 +33,7 @@ source $BASH_IT/bash_it.sh
 complete -cf sudo
 
 # Activate LS_COLORS in config
-eval `dircolors ~/dotfiles/dircolors/dircolors.256dark`
+eval `dircolors ~/.dircolors/dircolors.256dark`
 
 # ls right away
 ls

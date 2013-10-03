@@ -75,25 +75,19 @@
 
 " Change the default colorscheme
 " sy
-    colorscheme jellybeans
+    "colorscheme jellybeans
+    colorscheme solarized
     "let g:jellybeans_use_lowcolor_black = 1
 
 " Set tag file
     set tags=/home/jtsao22/.vimtags
 
 " Plugins
-    " For Tagbar, assign a key to toggleConsole
-        nnoremap <silent> <C-L> :TagbarToggle<CR>
-        let g:tagbar_left = 1
     
     " Pathogen support
         call pathogen#infect()
         filetype on
         filetype plugin on
-
-    " Snipmate
-        " Update snippets on the fly
-        " nmap ,rr :call ReloadSnippets(snippets_dir, &filetype)<CR>
 
     " Ultisnips
         let g:UltiSnipsExpandTrigger="<c-j>"
@@ -136,8 +130,7 @@
         set completeopt=menuone,menu,longest,preview"
 
     " YouCompleteMe
-    let g:ycm_global_ycm_extra_conf = '/home/jtsao22/.ycm_extra_confg.py'
-    let g:ycm_confirm_extra_conf = 0
-    "let g:ycm_extra_conf_globlist = ['~/wrk-manx/*']
+        let g:ycm_global_ycm_extra_conf = '/home/jtsao22/.ycm_extra_confg.py'
+        let g:ycm_confirm_extra_conf = 0
+        "let g:ycm_extra_conf_globlist = ['~/wrk-manx/*']
     
-
