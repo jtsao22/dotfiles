@@ -1,2 +1,4 @@
-Mac:
+# Mac coreutils includes ls & grep
 brew install coreutils
+
+

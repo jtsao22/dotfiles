@@ -55,3 +55,6 @@
 [submodule "dircolors"]
 	path = dircolors
 	url = https://github.com/seebi/dircolors-solarized.git
+[submodule "bash_it"]
+	path = bash_it
+	url = https://github.com/jtsao22/bash-it.git
