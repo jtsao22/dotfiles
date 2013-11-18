@@ -58,3 +58,6 @@
 [submodule "bash_it"]
 	path = bash_it
 	url = https://github.com/jtsao22/bash-it.git
+[submodule "vim/bundle/trailing_whitespace"]
+	path = vim/bundle/trailing_whitespace
+	url = https://github.com/bronson/vim-trailing-whitespace.git

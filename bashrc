@@ -32,6 +32,5 @@ complete -cf sudo
 eval `dircolors ~/.dircolors/dircolors.256dark`
 
 # ls right away
-cd ~/wrk-fast
 ls
 
