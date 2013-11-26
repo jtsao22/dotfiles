@@ -80,7 +80,7 @@
     "let g:jellybeans_use_lowcolor_black = 1
 
 " Plugins
-    
+
     " Pathogen support
         call pathogen#infect()
         filetype on
@@ -89,7 +89,7 @@
     " Ultisnips
         let g:UltiSnipsExpandTrigger="<c-j>"
         let g:UltiSnipsJumpForwardTrigger="<c-j>"
-        let g:UltiSnipsJumpBackwardTrigger="<c-k>" 
+        let g:UltiSnipsJumpBackwardTrigger="<c-k>"
 
     " NERDTree
         " Map toggle to Ctrl-e
@@ -101,7 +101,7 @@
         autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 
     " Indent-guides
-        " Make the indent-guide colors work with 256 xterm 
+        " Make the indent-guide colors work with 256 xterm
         let g:indent_guides_auto_colors = 0
         "hi IndentGuidesOdd ctermbg=dark
         hi IndentGuidesEven ctermbg=black
@@ -130,4 +130,4 @@
         let g:ycm_global_ycm_extra_conf = '/home/jtsao22/.ycm_extra_confg.py'
         let g:ycm_confirm_extra_conf = 0
         "let g:ycm_extra_conf_globlist = ['~/wrk-manx/*']
-    
+
