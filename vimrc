@@ -64,7 +64,7 @@
         autocmd! bufwritepost .vimrc source $MYVIMRC
     endif
 
-" Type ,v for easy access to vimrc editting
+" Type \v for easy access to vimrc editting
     nmap <leader>v :tabedit $MYVIMRC<CR>
 
 " Set 256 color mode

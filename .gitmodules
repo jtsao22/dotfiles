@@ -61,3 +61,6 @@
 [submodule "vim/bundle/trailing_whitespace"]
 	path = vim/bundle/trailing_whitespace
 	url = https://github.com/bronson/vim-trailing-whitespace.git
+[submodule "vim/bundle/alternate"]
+	path = vim/bundle/alternate
+	url = https://github.com/vim-scripts/a.vim.git
