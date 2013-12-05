@@ -10,16 +10,16 @@ export BASH_IT=$HOME/.bash_it
 # location /.bash_it/themes/
 export BASH_IT_THEME='clean'
 
-# Customize to your needs...  
+# Customize to your needs...
 export PATH=$PATH:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 
 # Set up TERM for good vim awesomeness
 export TERM=xterm-256color
 
-# If there's a bash profile, source it
-if [ -f ~/.bash_profile ];
+# If there's a bash session, source it
+if [ -f ~/.bash_session ]
 then
-    . ~/.bash_profile
+    . ~/.bash_session
 fi
 
 # Load Bash It
