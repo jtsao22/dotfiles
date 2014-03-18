@@ -27,6 +27,10 @@
     set gdefault            " the /g flag on :s substitutions by default
     set wildmenu            " Use builtin wildmenu function
     set wm=2                " Set automatic word-wrapping
+    set spell               " Set spell check
+
+" Enable pasting
+    imap <C-v> ^O:set paste<Enter>^R+^O:set nopaste<Enter>
 
 " Visual shifting (does not exit Visual Mode)
     vnoremap < <gv
