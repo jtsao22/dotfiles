@@ -1,7 +1,7 @@
 " Jason Tsao's VIMRC file "
 
 " Configuration Variables
-    set tw=80               " Default textwidth
+    "set tw=100               " Default textwidth
     set ts=4                " Default tabstop
     set et                  " Expand tabs into spaces
     set shiftwidth=4        " Set default tab width to 4
@@ -26,8 +26,10 @@
     set foldenable          " auto fold code
     set gdefault            " the /g flag on :s substitutions by default
     set wildmenu            " Use builtin wildmenu function
-    set wm=2                " Set automatic word-wrapping
     set spell               " Set spell check
+    set relativenumber      " Relative line numbering
+    set colorcolumn=100     " Add colorcolumn
+    highlight ColorColumn ctermbg=lightblue guibg=lightblue
 
 " Enable pasting
     imap <C-v> ^O:set paste<Enter>^R+^O:set nopaste<Enter>
@@ -107,7 +109,7 @@
     " Indent-guides
         " Make the indent-guide colors work with 256 xterm
         let g:indent_guides_auto_colors = 0
-        "hi IndentGuidesOdd ctermbg=dark
+        "hi IndentGuidesOdd ctermbg=darkgrey
         hi IndentGuidesEven ctermbg=black
         let g:indent_guides_enable_on_vim_startup = 1
 
