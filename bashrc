@@ -31,9 +31,11 @@ complete -cf sudo
 # Activate LS_COLORS in config
 eval `dircolors ~/.dircolors/dircolors.256dark`
 
+# Use bash completion
+#source /etc/bash_completion
+
 # Bash Vi mode
 set -o vi
 
 # ls right away
 ls
-
