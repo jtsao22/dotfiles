@@ -16,6 +16,9 @@ export PATH=$PATH:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 # Set up TERM for good vim awesomeness
 export TERM=xterm-256color
 
+# Use vim to read man pages
+export MANPAGER="/bin/sh -c \"col -b | vim -c 'set ft=man ts=8 nomod nolist nonu noma' -\""
+
 # If there's a bash session, source it
 if [ -f ~/.bash_session ]
 then
