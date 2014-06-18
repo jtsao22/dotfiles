@@ -28,10 +28,14 @@
     set wildmenu            " Use builtin wildmenu function
     set spell               " Set spell check
     set relativenumber      " Relative line numbering
-    set colorcolumn=100     " Add colorcolumn
+    set colorcolumn=80      " Add colorcolumn
     highlight ColorColumn ctermbg=lightblue guibg=lightblue
 
+" Enable copying to the system clipboard
+    vmap <C-c> y:call system("xclip -i -selection clipboard", getreg("\""))<CR>:call system("xclip -i", getreg("\""))<CR>
+
 " Enable pasting
+" from: http://vim.wikia.com/wiki/In_line_copy_and_paste_to_system_clipboard
     imap <C-v> ^O:set paste<Enter>^R+^O:set nopaste<Enter>
 
 " Visual shifting (does not exit Visual Mode)
