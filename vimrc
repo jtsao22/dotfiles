@@ -1,7 +1,7 @@
 " Jason Tsao's VIMRC file "
 
 " Configuration Variables
-    "set tw=100               " Default textwidth
+    set tw=100               " Default textwidth
     set ts=4                " Default tabstop
     set et                  " Expand tabs into spaces
     set shiftwidth=4        " Set default tab width to 4
@@ -28,7 +28,7 @@
     set wildmenu            " Use builtin wildmenu function
     set spell               " Set spell check
     set relativenumber      " Relative line numbering
-    set colorcolumn=80      " Add colorcolumn
+    set colorcolumn=100     " Add colorcolumn
     highlight ColorColumn ctermbg=lightblue guibg=lightblue
 
 " Enable copying to the system clipboard
@@ -110,13 +110,6 @@
         " Close vim if the only window left open is NERDTree
         autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 
-    " Indent-guides
-        " Make the indent-guide colors work with 256 xterm
-        let g:indent_guides_auto_colors = 0
-        "hi IndentGuidesOdd ctermbg=darkgrey
-        hi IndentGuidesEven ctermbg=black
-        let g:indent_guides_enable_on_vim_startup = 1
-
     " OmniCppComplete
         " Configure tabs from tag location
         set tags+=~/.vim/bundle/OmniCppComplete/tags/cpp
@@ -139,5 +132,4 @@
     " YouCompleteMe
         let g:ycm_global_ycm_extra_conf = '/home/jtsao22/.ycm_extra_confg.py'
         let g:ycm_confirm_extra_conf = 0
-        "let g:ycm_extra_conf_globlist = ['~/wrk-manx/*']
 
