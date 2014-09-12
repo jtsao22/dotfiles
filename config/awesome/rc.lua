@@ -245,12 +245,7 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey, "Control" }, "n", awful.client.restore),
 
     -- Jason Additions
-    awful.key({ modkey,           }, "r",
-                function() awful.util.spawn_with_shell( "exe=`dmenu_path | dmenu -nf '#888888' -nb '#222222' -sf '#ffffff' -sb '#285577'` && exec $exe" )
-      end),
-
-    -- Prompt
-    -- awful.key({ modkey },            "r",     function () mypromptbox[mouse.screen]:run() end),
+    awful.key({modkey }, "r", function() awful.util.spawn("dmenu_run") end),
 
     awful.key({ modkey }, "x",
               function ()
