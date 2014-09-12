@@ -377,16 +377,5 @@ client.add_signal("focus", function(c) c.border_color = beautiful.border_focus e
 client.add_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
 -- }}}
 
--- {{{ Startup Prompt
---do
-  --local cmds =
-  --{
-    --"firefox",
-    --"terminator"
-  --}
-
-  --for _,i in pairs(cmds) do
-    --awful.util.spawn(i)
-  --end
---end
--- }}}
+-- Autostart programs
+awful.util.spawn("gnome-sound-applet")
