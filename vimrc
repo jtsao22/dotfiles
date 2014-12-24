@@ -29,7 +29,7 @@
     set spell                       " Set spell check
     set colorcolumn=100             " Add colorcolumn
     set enc=utf-8                   " utf-8 encoding
-    set list                        " Show tabs
+    set list                        " Show tabs;
     set listchars=tab:>-,trail:-    " Show tabs"
 
     highlight ColorColumn ctermbg=lightblue guibg=lightblue
@@ -86,8 +86,7 @@ set cino=N-s
 " Set 256 color mode
     set t_Co=256
     syntax enable
-    let g:solarized_termtrans = 1
-    "set background=dark
+    set background=dark
 
 " Change the default colorscheme
 " sy
