@@ -10,7 +10,7 @@ export BASH_IT=$HOME/.bash_it
 # location /.bash_it/themes/
 export BASH_IT_THEME='clean'
 
-# Customize to your needs...  
+# Customize to your needs...
 export PATH=$PATH:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 
 ## Set up TERM for good vim awesomeness

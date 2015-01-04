@@ -1,32 +1,48 @@
 " Jason Tsao's VIMRC file "
 
 " Configuration Variables
-    set tw=80               " Default textwidth
-    set ts=4                " Default tabstop
-    set et                  " Expand tabs into spaces
-    set shiftwidth=4        " Set default tab width to 4
-    set bs=indent,eol,start " Allow backspacing over EVERYTHING in insert mode
-    set ww=[,],<,>,h,l,b,s  " Allow movement commands to wrap
-    set scrolljump=8        " Jump 8 lines at a time when scrolling
-    set scrolloff=2         " Show two lines above/below cursor
-    set autowrite           " Write buffer when switching (e.g. :make)
-    set ruler               " Show line,column numbers
-    set hlsearch            " Highlight search terms
-    set laststatus=2        " Yeah status line!
-    filetype indent on      " Indent properly
-    syntax on               " Turn on syntax coloring for color terminals
-    set viminfo='100,f1     " Save marks for the last 100 files
-    set number              " Show line numbers
-    " set showmatch           " Cause cursor to briefly jump to a brace/parentheses/bracket's match
-    set incsearch           " Search while you type
-    set ignorecase          " For making searching case insensitive
-    set smartcase           " For making searching with capitalized letters case sensitive
-    set autoindent          " autoindent when possible
-    set smartindent         " Do it smartly
-    set foldenable          " auto fold code
-    set gdefault            " the /g flag on :s substitutions by default
-    set wildmenu            " Use builtin wildmenu function
-    set wm=2                " Set automatic word-wrapping
+    set tw=100                      " Default textwidth
+    set ts=4                        " Default tabstop
+    set et                          " Expand tabs into spaces
+    set shiftwidth=4                " Set default tab width to 4
+    set bs=indent,eol,start         " Allow backspacing over EVERYTHING in insert mode
+    set ww=[,],<,>,h,l,b,s          " Allow movement commands to wrap
+    set scrolljump=8                " Jump 8 lines at a time when scrolling
+    set scrolloff=2                 " Show two lines above/below cursor
+    set autowrite                   " Write buffer when switching (e.g. :make)
+    set ruler                       " Show line,column numbers
+    set hlsearch                    " Highlight search terms
+    set laststatus=2                " Yeah status line!
+    filetype indent on              " Indent properly
+    syntax on                       " Turn on syntax coloring for color terminals
+    set viminfo='100,f1             " Save marks for the last 100 files
+    set number                      " Show line numbers
+    " set showmatch                   " Cause cursor to briefly jump to a brace/parentheses/bracket's match
+    set incsearch                   " Search while you type
+    set ignorecase                  " For making searching case insensitive
+    set smartcase                   " For making searching with capitalized letters case sensitive
+    set autoindent                  " autoindent when possible
+    set smartindent                 " Do it smartly
+    set foldenable                  " auto fold code
+    set gdefault                    " the /g flag on :s substitutions by default
+    set wildmenu                    " Use builtin wildmenu function
+    set spell                       " Set spell check
+    set colorcolumn=100             " Add colorcolumn
+    set enc=utf-8                   " utf-8 encoding
+    set list                        " Show tabs;
+    set listchars=tab:>-,trail:-    " Show tabs"
+
+    highlight ColorColumn ctermbg=lightblue guibg=lightblue
+
+" Remove namespace indentation for cpp files
+set cino=N-s
+
+" Enable copying to the system clipboard
+    vmap <C-c> y:call system("xclip -i -selection clipboard", getreg("\""))<CR>:call system("xclip -i", getreg("\""))<CR>
+
+" Enable pasting
+" from: http://vim.wikia.com/wiki/In_line_copy_and_paste_to_system_clipboard
+    imap <C-v> ^O:set paste<Enter>^R+^O:set nopaste<Enter>
 
 " Visual shifting (does not exit Visual Mode)
     vnoremap < <gv
@@ -70,8 +86,7 @@
 " Set 256 color mode
     set t_Co=256
     syntax enable
-    let g:solarized_termtrans = 1
-    "set background=dark
+    set background=dark
 
 " Change the default colorscheme
 " sy
@@ -100,13 +115,6 @@
         " Close vim if the only window left open is NERDTree
         autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 
-    " Indent-guides
-        " Make the indent-guide colors work with 256 xterm
-        let g:indent_guides_auto_colors = 0
-        "hi IndentGuidesOdd ctermbg=dark
-        hi IndentGuidesEven ctermbg=black
-        let g:indent_guides_enable_on_vim_startup = 1
-
     " OmniCppComplete
         " Configure tabs from tag location
         set tags+=~/.vim/bundle/OmniCppComplete/tags/cpp
@@ -129,5 +137,3 @@
     " YouCompleteMe
         let g:ycm_global_ycm_extra_conf = '/home/jtsao22/.ycm_extra_confg.py'
         let g:ycm_confirm_extra_conf = 0
-        "let g:ycm_extra_conf_globlist = ['~/wrk-manx/*']
-
