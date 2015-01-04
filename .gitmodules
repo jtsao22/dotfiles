@@ -37,9 +37,6 @@
 [submodule "vim/bundle/jedi"]
 	path = vim/bundle/jedi
 	url = https://github.com/davidhalter/jedi.git
-[submodule "vim/bundle/ultisnips"]
-	path = vim/bundle/ultisnips
-	url = https://github.com/jtsao22/ultisnips.git
 [submodule "vim/bundle/YouCompleteMe"]
 	path = vim/bundle/YouCompleteMe
 	url = https://github.com/Valloric/YouCompleteMe.git
