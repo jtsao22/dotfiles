@@ -26,11 +26,11 @@
     set foldenable                  " auto fold code
     set gdefault                    " the /g flag on :s substitutions by default
     set wildmenu                    " Use builtin wildmenu function
-    set spell                       " Set spell check
     set colorcolumn=100             " Add colorcolumn
     set enc=utf-8                   " utf-8 encoding
     set list                        " Show tabs;
     set listchars=tab:>-,trail:-    " Show tabs"
+    set tags=tags;                  " look for tags file in parent folders
 
     highlight ColorColumn ctermbg=lightblue guibg=lightblue
 
@@ -137,3 +137,7 @@ set cino=N-s
     " YouCompleteMe
         let g:ycm_global_ycm_extra_conf = '/home/jtsao22/.ycm_extra_confg.py'
         let g:ycm_confirm_extra_conf = 0
+
+    " Add airline powerline fonts
+        let g:airline_powerline_fonts = 1
+        let g:airline_theme="base16"

@@ -253,6 +253,11 @@ globalkeys = awful.util.table.join(
                   mypromptbox[mouse.screen].widget,
                   awful.util.eval, nil,
                   awful.util.getdir("cache") .. "/history_eval")
+              end),
+
+    awful.key({ modkey, "Control" }, "k",
+              function ()
+                  awful.util.spawn("gnome-screensaver-command --lock")
               end)
 )
 
