@@ -383,4 +383,8 @@ client.add_signal("unfocus", function(c) c.border_color = beautiful.border_norma
 -- }}}
 
 -- Autostart programs
-awful.util.spawn("gnome-sound-applet")
+awful.util.spawn_with_shell("/usr/bin/gnome-sound-applet")
+awful.util.spawn_with_shell("/usr/bin/google-chrome")
+awful.util.spawn_with_shell("/usr/bin/gnome-terminal.wrapper")
+awful.util.spawn_with_shell("/usr/bin/spotify")
+awful.util.spawn_with_shell("/usr/bin/synergy")

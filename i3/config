@@ -11,8 +11,14 @@
 
 set $mod Mod1
 
-# font for window titles. ISO 10646 = Unicode
+# Font for window titles. Will also be used by the bar unless a different font
+# is used in the bar {} block below. ISO 10646 = Unicode
 font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
+# The font above is very space-efficient, that is, it looks good, sharp and
+# clear in small sizes. However, if you need a lot of unicode glyphs or
+# right-to-left text rendering, you should instead use pango for rendering and
+# chose a FreeType font, such as:
+font pango:DejaVu Sans Mono 10
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
@@ -25,6 +31,10 @@ bindsym $mod+Shift+c kill
 
 # start dmenu (a program launcher)
 bindsym $mod+d exec dmenu_run
+# There also is the (new) i3-dmenu-desktop which only displays applications
+# shipping a .desktop file. It is a wrapper around dmenu, so you need that
+# installed.
+# bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
 
 # change focus
 bindsym $mod+h focus left
@@ -39,10 +49,10 @@ bindsym $mod+Up focus up
 bindsym $mod+Right focus right
 
 # move focused window
-bindsym $mod+Shift+J move left
-bindsym $mod+Shift+K move down
-bindsym $mod+Shift+L move up
-bindsym $mod+Shift+colon move right
+bindsym $mod+Shift+h move left
+bindsym $mod+Shift+j move down
+bindsym $mod+Shift+k move up
+bindsym $mod+Shift+l move right
 
 # alternatively, you can use the cursor keys:
 bindsym $mod+Shift+Left move left
@@ -59,10 +69,10 @@ bindsym $mod+v split v
 # enter fullscreen mode for the focused container
 bindsym $mod+f fullscreen
 
-# change container layout (stacked, tabbed, default)
+# change container layout (stacked, tabbed, toggle split)
 bindsym $mod+s layout stacking
 bindsym $mod+w layout tabbed
-bindsym $mod+e layout default
+bindsym $mod+e layout toggle split
 
 # toggle tiling / floating
 bindsym $mod+Shift+space floating toggle
@@ -74,7 +84,7 @@ bindsym $mod+space focus mode_toggle
 bindsym $mod+a focus parent
 
 # focus the child container
-#bindcode $mod+d focus child
+#bindsym $mod+d focus child
 
 # switch to workspace
 bindsym $mod+1 workspace 1
@@ -105,7 +115,7 @@ bindsym $mod+Shift+parenright move workspace 10
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+R restart
 # exit i3 (logs you out of your X session)
-bindsym $mod+Shift+E exit
+bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
@@ -161,19 +171,21 @@ bar {
 exec --no-startup-id xsetroot -solid "#002244"
 
 new_window 1pixel
-new_float none
+bindsym XF86AudioRaiseVolume exec amixer -q set Master 2dB+ unmute
+bindsym XF86AudioLowerVolume exec amixer -q set Master 2dB- unmute
+bindsym XF86AudioMute exec amixer -q set Master toggle
+
+# startup applications
+exec --no-startup-id i3-msg 'workspace 4; exec gnome-terminal; exec spotify;'
+exec --no-startup-id i3-msg 'workspace 2; exec gnome-terminal;'
+exec --no-startup-id i3-msg 'workspace 3; exec gnome-terminal;'
+exec --no-startup-id i3-msg 'workspace 1; exec google-chrome;'
 
 # Toggle movement
 #bindsym $mod+a move workspace prev
 #bindsym $mod+Shift+a move workspace prev_on_output
 bindsym $mod+n workspace next
 bindsym $mod+p workspace prev
-
-# switch between the current and the previously focused one
-#bindsym $mod+b workspace back_and_forth
-#bindsym $mod+Shift+b move container to workspace back_and_forth
-bindsym $mod+b workspace next_on_output
-bindsym $mod+Shift+b workspace prev_on_output
 
 # move workspace between outputs
 bindsym $mod+y move workspace to output left
@@ -182,20 +194,6 @@ bindsym $mod+y move workspace to output left
 bindsym $mod+Ctrl+h focus output left
 bindsym $mod+Ctrl+l focus output right
 
-set $locker i3lock
-set $mode_system System (l) lock, (e) logout, (s) suspend, (r) reboot, (Shift+s) shutdown
-
-mode "$mode_system" {
-    bindsym l exec --no-startup-id $locker, mode "default"
-    bindsym e exec --no-startup-id i3-msg exit, mode "default"
-    bindsym s exec --no-startup-id systemctl suspend, mode "default"
-    bindsym r exec --no-startup-id systemctl reboot, mode "default"
-    bindsym Shift+s exec --no-startup-id systemctl poweroff -i, mode "default"
-    bindsym Return mode "default"
-    bindsym Escape mode "default"
-}
-bindsym $mod+Ctrl+k mode "$mode_system"
-
-# Change system volume
-bindsym $mod+u exec amixer -q set Master 2dB+ unmute
-bindsym $mod+i exec amixer -q set Master 2dB- unmute
+# Setup dual monitors
+exec_always --no-startup-id xrandr --output DVI-I-1 --mode 1920x1080
+exec_always --no-startup-id xrandr --output DVI-D-1 --mode 1920x1200
