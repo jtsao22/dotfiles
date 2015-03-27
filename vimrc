@@ -108,10 +108,10 @@ set cino=N-s
 
     " NERDTree
         " Map toggle to Ctrl-e
-        map <C-e> :NERDTreeToggle<CR>
-        "autocmd VimEnter * NERDTree                             " Open NERDTree automatically
-        "autocmd VimEnter * wincmd w                             " Place cursor in the correct window
-        "autocmd VimEnter * if !argc() | NERDTree | endif        " Open NERDTree if no files specified
+        map <leader>e :NERDTreeToggle<CR>;
+        "autocmd VimEnter * NERDTree                             " Open NERDTree automatically;
+        "autocmd VimEnter * wincmd w                             " Place cursor in the correct window;
+        "autocmd VimEnter * if !argc() | NERDTree | endif        " Open NERDTree if no files specified;
         " Close vim if the only window left open is NERDTree
         autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 
