@@ -50,8 +50,5 @@ if [ -f /etc/bash_completion ]; then
     __git_complete gb _git_branch
 fi
 
-# Bash Vi mode
-set -o vi
-
 # ls right away
 ls
