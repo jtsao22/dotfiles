@@ -18,7 +18,7 @@ font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
 # clear in small sizes. However, if you need a lot of unicode glyphs or
 # right-to-left text rendering, you should instead use pango for rendering and
 # chose a FreeType font, such as:
-font pango:DejaVu Sans Mono 10
+#font pango:DejaVu Sans Mono 10
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
@@ -170,6 +170,20 @@ bar {
 
 exec --no-startup-id xsetroot -solid "#002244"
 
+set $locker i3lock
+set $mode_system System (l) lock, (e) logout, (s) suspend, (r) reboot, (Shift+s) shutdown
+
+mode "$mode_system" {
+    bindsym l exec --no-startup-id $locker, mode "default"
+    bindsym e exec --no-startup-id i3-msg exit, mode "default"
+    bindsym s exec --no-startup-id systemctl suspend, mode "default"
+    bindsym r exec --no-startup-id systemctl reboot, mode "default"
+    bindsym Shift+s exec --no-startup-id systemctl poweroff -i, mode "default"
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+bindsym $mod+Ctrl+k mode "$mode_system"
+
 new_window 1pixel
 bindsym XF86AudioRaiseVolume exec amixer -q set Master 2dB+ unmute
 bindsym XF86AudioLowerVolume exec amixer -q set Master 2dB- unmute
@@ -197,3 +211,7 @@ bindsym $mod+Ctrl+l focus output right
 # Setup dual monitors
 exec_always --no-startup-id xrandr --output DVI-I-1 --mode 1920x1080
 exec_always --no-startup-id xrandr --output DVI-D-1 --mode 1920x1200 --right-of DVI-I-1
+
+# Set focus color
+# class                 border  backgr. text    indicator
+client.focused          #4c7899 #ff0000 #ffffff #2e9ef4
