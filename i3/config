@@ -69,6 +69,12 @@ bindsym $mod+v split v
 # enter fullscreen mode for the focused container
 bindsym $mod+f fullscreen
 
+# Go to workspace with urgent window
+bindsym $mod+U [urgent="last"] focus
+
+assign [class="chrome"] 1
+bindsym $mod+g [class="chrome"] focus
+
 # change container layout (stacked, tabbed, toggle split)
 bindsym $mod+s layout stacking
 bindsym $mod+w layout tabbed
@@ -110,6 +116,30 @@ bindsym $mod+Shift+asterisk move workspace 8
 bindsym $mod+Shift+parenleft move workspace 9
 bindsym $mod+Shift+parenright move workspace 10
 
+# Toggle movement
+#bindsym $mod+a move workspace prev
+#bindsym $mod+Shift+a move workspace prev_on_output
+bindsym $mod+n workspace next
+bindsym $mod+p workspace prev
+
+# move workspace between outputs
+bindsym $mod+y move workspace to output left
+
+# Move focus to left/right output
+bindsym $mod+Ctrl+h focus output left
+bindsym $mod+Ctrl+l focus output right
+
+# Start i3bar to display a workspace bar (plus the system information i3status
+# finds out, if available)
+bar {
+    position top
+    status_command i3status
+    colors {
+        background #232323
+        statusline #DCDCDC
+    }
+}
+
 # reload the configuration file
 #bindsym $mod+Shift+C reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
@@ -117,14 +147,14 @@ bindsym $mod+Shift+R restart
 # exit i3 (logs you out of your X session)
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
 
+# MODES
 # resize window (you can also use the mouse for that)
 mode "resize" {
-        # These bindings trigger as soon as you enter the resize mode
+    # These bindings trigger as soon as you enter the resize mode
 
-        # They resize the border in the direction you pressed, e.g.
-        # when pressing left, the window is resized so that it has
-        # more space on its left
-
+    # They resize the border in the direction you pressed, e.g.
+    # when pressing left, the window is resized so that it has
+    # more space on its left
     bindsym j resize shrink left 10 px or 10 ppt
     bindsym Shift+J resize grow   left 10 px or 10 ppt
 
@@ -157,18 +187,6 @@ mode "resize" {
 
 bindsym $mod+r mode "resize"
 
-# Start i3bar to display a workspace bar (plus the system information i3status
-# finds out, if available)
-bar {
-    position top
-    status_command i3status
-    colors {
-        background #232323
-        statusline #DCDCDC
-    }
-}
-
-exec --no-startup-id xsetroot -solid "#002244"
 
 set $locker i3lock
 set $mode_system System (l) lock, (e) logout, (s) suspend, (r) reboot, (Shift+s) shutdown
@@ -184,7 +202,10 @@ mode "$mode_system" {
 }
 bindsym $mod+Ctrl+k mode "$mode_system"
 
+#1pixel borders
 new_window 1pixel
+
+# Volume/Mute Buttons
 bindsym XF86AudioRaiseVolume exec amixer -q set Master 2dB+ unmute
 bindsym XF86AudioLowerVolume exec amixer -q set Master 2dB- unmute
 bindsym XF86AudioMute exec amixer -q set Master toggle
@@ -194,19 +215,7 @@ exec --no-startup-id i3-msg 'workspace 4; exec gnome-terminal; exec spotify;'
 exec --no-startup-id i3-msg 'workspace 2; exec gnome-terminal;'
 exec --no-startup-id i3-msg 'workspace 3; exec gnome-terminal;'
 exec --no-startup-id i3-msg 'workspace 1; exec google-chrome;'
-
-# Toggle movement
-#bindsym $mod+a move workspace prev
-#bindsym $mod+Shift+a move workspace prev_on_output
-bindsym $mod+n workspace next
-bindsym $mod+p workspace prev
-
-# move workspace between outputs
-bindsym $mod+y move workspace to output left
-
-# Move focus to left/right output
-bindsym $mod+Ctrl+h focus output left
-bindsym $mod+Ctrl+l focus output right
+exec --no-startup-id dropbox start
 
 # Setup dual monitors
 exec_always --no-startup-id xrandr --output DVI-I-1 --mode 1920x1080
@@ -215,3 +224,14 @@ exec_always --no-startup-id xrandr --output DVI-D-1 --mode 1920x1200 --right-of 
 # Set focus color
 # class                 border  backgr. text    indicator
 client.focused          #4c7899 #ff0000 #ffffff #2e9ef4
+
+# Workspace settings
+workspace 1 output DVI-I-1
+workspace 2 output DVI-I-1
+workspace 3 output DVI-I-1
+workspace 4 output DVI-I-1
+workspace 5 output DVI-I-1
+workspace 6 output DVI-D-1
+workspace 7 output DVI-D-1
+workspace 8 output DVI-D-1
+workspace 9 output DVI-D-1
