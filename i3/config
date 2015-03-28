@@ -223,7 +223,7 @@ exec_always --no-startup-id xrandr --output DVI-D-1 --mode 1920x1200 --right-of 
 
 # Set focus color
 # class                 border  backgr. text    indicator
-client.focused          #4c7899 #ff0000 #ffffff #2e9ef4
+client.focused          #4c7899 #00ffff #ffffff #2e9ef4
 
 # Workspace settings
 workspace 1 output DVI-I-1
