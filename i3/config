@@ -214,8 +214,9 @@ bindsym XF86AudioMute exec amixer -q set Master toggle
 exec --no-startup-id i3-msg 'workspace 4; exec gnome-terminal; exec spotify;'
 exec --no-startup-id i3-msg 'workspace 2; exec gnome-terminal;'
 exec --no-startup-id i3-msg 'workspace 3; exec gnome-terminal;'
-exec --no-startup-id i3-msg 'workspace 1; exec google-chrome;'
+exec --no-startup-id i3-msg 'workspace 6; exec google-chrome;'
 exec --no-startup-id dropbox start
+exec --no-startup-id caffeine
 
 # Setup dual monitors
 exec_always --no-startup-id xrandr --output DVI-I-1 --mode 1920x1080
