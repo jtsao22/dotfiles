@@ -73,7 +73,7 @@ set cino=N-s
     au BufRead *.vis so %
 
 " Automatically change to the current directory that the file is located in.
-    autocmd BufEnter * silent! lcd %:p:h
+    "autocmd BufEnter * silent! lcd %:p:h
 
 " Source vimrc file after saving it
     if has("autocmd")
@@ -107,7 +107,7 @@ set cino=N-s
         let g:UltiSnipsJumpBackwardTrigger="<c-k>"
 
     " NERDTree
-        " Map toggle to Ctrl-e
+        " Map toggle to leader-e
         map <leader>e :NERDTreeToggle<CR>;
         "autocmd VimEnter * NERDTree                             " Open NERDTree automatically;
         "autocmd VimEnter * wincmd w                             " Place cursor in the correct window;
@@ -141,3 +141,4 @@ set cino=N-s
     " Add airline powerline fonts
         let g:airline_powerline_fonts = 1
         let g:airline_theme="base16"
+        let g:airline#extensions#branch#enabled = 0

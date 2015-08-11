@@ -50,5 +50,8 @@ if [ -f /etc/bash_completion ]; then
     __git_complete gb _git_branch
 fi
 
+# use ccache
+export USE_CCACHE=1
+
 # ls right away
 ls

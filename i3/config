@@ -10,6 +10,7 @@
 # Please see http://i3wm.org/docs/userguide.html for a complete reference!
 
 set $mod Mod1
+set $TERMINAL konsole
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below. ISO 10646 = Unicode
@@ -24,17 +25,17 @@ font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec i3-sensible-terminal
+bindsym $mod+Return exec konsole
 
 # kill focused window
 bindsym $mod+Shift+c kill
 
 # start dmenu (a program launcher)
-bindsym $mod+d exec /usr/bin/dmenu.sh
+bindsym $mod+d exec dmenu_run
 # There also is the (new) i3-dmenu-desktop which only displays applications
 # shipping a .desktop file. It is a wrapper around dmenu, so you need that
 # installed.
-# bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
+bindsym $mod+Shift+d exec --no-startup-id i3-dmenu-desktop
 
 # change focus
 bindsym $mod+h focus left
@@ -65,6 +66,7 @@ bindsym $mod+Shift+Right move right
 
 # split in vertical orientation
 bindsym $mod+v split v
+bindsym $mod+Shift+v split h
 
 # enter fullscreen mode for the focused container
 bindsym $mod+f fullscreen
@@ -72,8 +74,8 @@ bindsym $mod+f fullscreen
 # Go to workspace with urgent window
 bindsym $mod+U [urgent="last"] focus
 
-assign [class="chrome"] 1
-bindsym $mod+g [class="chrome"] focus
+assign [class="firefox"] 6
+bindsym $mod+g [class="firefox"] focus
 
 # change container layout (stacked, tabbed, toggle split)
 bindsym $mod+s layout stacking
@@ -141,7 +143,7 @@ bar {
 }
 
 # reload the configuration file
-#bindsym $mod+Shift+C reload
+bindsym $mod+Shift+F reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+R restart
 # exit i3 (logs you out of your X session)
@@ -188,7 +190,7 @@ mode "resize" {
 bindsym $mod+r mode "resize"
 
 
-set $locker i3lock
+set $locker gnome-screensaver-command --lock
 set $mode_system System (l) lock, (e) logout, (s) suspend, (r) reboot, (Shift+s) shutdown
 
 mode "$mode_system" {
@@ -211,28 +213,16 @@ bindsym XF86AudioLowerVolume exec amixer -q set Master 2dB- unmute
 bindsym XF86AudioMute exec amixer -q set Master toggle
 
 # startup applications
-exec --no-startup-id i3-msg 'workspace 4; exec gnome-terminal; exec spotify;'
-exec --no-startup-id i3-msg 'workspace 2; exec gnome-terminal;'
-exec --no-startup-id i3-msg 'workspace 3; exec gnome-terminal;'
-exec --no-startup-id i3-msg 'workspace 6; exec google-chrome;'
+exec --no-startup-id i3-msg 'workspace 1; exec konsole;'
+exec --no-startup-id i3-msg 'workspace 6; exec firefox;'
 exec --no-startup-id dropbox start
 exec --no-startup-id caffeine
+exec --no-startup-id synergy
+exec --no-startup-id nm-applet
+exec --no-startup-id gnome-sound-applet
+exec --no-startup-id feh --bg-scale ~/.i3/background.jpg
 
-# Setup dual monitors
-exec_always --no-startup-id xrandr --output DVI-I-1 --mode 1920x1080
-exec_always --no-startup-id xrandr --output DVI-D-1 --mode 1920x1200 --right-of DVI-I-1
 
 # Set focus color
 # class                 border  backgr. text    indicator
 client.focused          #4c7899 #00ffff #ffffff #2e9ef4
-
-# Workspace settings
-workspace 1 output DVI-I-1
-workspace 2 output DVI-I-1
-workspace 3 output DVI-I-1
-workspace 4 output DVI-I-1
-workspace 5 output DVI-I-1
-workspace 6 output DVI-D-1
-workspace 7 output DVI-D-1
-workspace 8 output DVI-D-1
-workspace 9 output DVI-D-1
