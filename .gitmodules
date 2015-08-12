@@ -1,75 +1,9 @@
-[submodule "vim/bundle/nerdcommenter"]
-	path = vim/bundle/nerdcommenter
-	url = https://github.com/scrooloose/nerdcommenter.git
-[submodule "vim/bundle/nerdtree"]
-	path = vim/bundle/nerdtree
-	url = https://github.com/scrooloose/nerdtree.git
-[submodule "vim/bundle/tabular"]
-	path = vim/bundle/tabular
-	url = https://github.com/godlygeek/tabular.git
-[submodule "vim/bundle/delimitMate"]
-	path = vim/bundle/delimitMate
-	url = https://github.com/Raimondi/delimitMate.git
-[submodule "vim/bundle/AutoComplPop"]
-	path = vim/bundle/AutoComplPop
-	url = https://github.com/vim-scripts/AutoComplPop.git
-[submodule "vim/bundle/OmniCppComplete"]
-	path = vim/bundle/OmniCppComplete
-	url = https://github.com/vim-scripts/OmniCppComplete.git
-[submodule "vim/bundle/guicolorscheme"]
-	path = vim/bundle/guicolorscheme
-	url = https://github.com/thinca/vim-guicolorscheme.git
-[submodule "vim/bundle/syntastic"]
-	path = vim/bundle/syntastic
-	url = https://github.com/scrooloose/syntastic.git
-[submodule "vim/bundle/rainbow_parentheses"]
-	path = vim/bundle/rainbow_parentheses
-	url = https://github.com/kien/rainbow_parentheses.vim.git
-[submodule "vim/bundle/ctrlp"]
-	path = vim/bundle/ctrlp
-	url = https://github.com/kien/ctrlp.vim
-[submodule "vim/bundle/vim-pep8-indent"]
-	path = vim/bundle/vim-pep8-indent
-	url = https://github.com/hynek/vim-python-pep8-indent.git
-[submodule "vim/bundle/jedi"]
-	path = vim/bundle/jedi
-	url = https://github.com/davidhalter/jedi.git
-[submodule "vim/bundle/auto_pairs"]
-	path = vim/bundle/auto_pairs
-	url = https://github.com/jiangmiao/auto-pairs.git
-[submodule "vim/bundle/easytags"]
-	path = vim/bundle/easytags
-	url = https://github.com/xolox/vim-easytags.git
-[submodule "vim/bundle/misc_for_easytags"]
-	path = vim/bundle/misc_for_easytags
-	url = https://github.com/xolox/vim-misc.git
 [submodule "dircolors"]
 	path = dircolors
 	url = https://github.com/seebi/dircolors-solarized.git
 [submodule "bash_it"]
 	path = bash_it
 	url = https://github.com/jtsao22/bash-it.git
-[submodule "vim/bundle/trailing_whitespace"]
-	path = vim/bundle/trailing_whitespace
-	url = https://github.com/bronson/vim-trailing-whitespace.git
-[submodule "vim/bundle/alternate"]
-	path = vim/bundle/alternate
-	url = https://github.com/vim-scripts/a.vim.git
-[submodule "vim/bundle/fugitive"]
-	path = vim/bundle/fugitive
-	url = https://github.com/tpope/vim-fugitive.git
-[submodule "vim/bundle/vim-surround"]
-	path = vim/bundle/vim-surround
-	url = https://github.com/tpope/vim-surround.git
-[submodule "vim/bundle/ag"]
-	path = vim/bundle/ag
-	url = https://github.com/rking/ag.vim.git
-[submodule "vim/bundle/solarized"]
-	path = vim/bundle/solarized
-	url = https://github.com/altercation/vim-colors-solarized.git
-[submodule "vim/bundle/vim-airline"]
-	path = vim/bundle/vim-airline
-	url = https://github.com/bling/vim-airline.git
-[submodule "Ultisnip"]
-	path = vim/bundle/ultisnips
-	url = https://github.com/jtsao22/ultisnips.git
+[submodule "fonts"]
+	path = fonts
+	url = git@github.com:powerline/fonts.git

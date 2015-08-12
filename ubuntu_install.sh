@@ -36,9 +36,3 @@ else
   wget -qO ~/.kde/share/apps/konsole/Solarized\ Light.colorscheme "https://raw.github.com/phiggins/konsole-colors-solarized/master/Solarized%20Light.colorscheme"
   wget -qO ~/.kde/share/apps/konsole/Solarized\ Dark.colorscheme "https://raw.github.com/phiggins/konsole-colors-solarized/master/Solarized%20Dark.colorscheme"
 fi
-
-# Install solarized theme for gnome-terminal
-# Need to add powerline fonts and set the encoding to UTF-8
-sudo apt-get install dconf
-git clone https://github.com/Anthony25/gnome-terminal-colors-solarized.git
-./install.sh
