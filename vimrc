@@ -97,9 +97,37 @@ set cino=N-s
 " Plugins
 
     " Pathogen support
-        call pathogen#infect()
+        "call pathogen#infect()
+        "filetype on
+        "filetype plugin on
+
+    " Vundle support
+        set nocompatible
+        filetype off
+        set runtimepath+=~/dotfiles/vim/bundle/Vundle.vim
+        call vundle#rc()
+
+        Bundle 'gmarik/vundle'
         filetype on
-        filetype plugin on
+
+        Bundle 'vim-scripts/AutoComplPop'
+        Bundle 'vim-scripts/OmniCppComplete'
+        Bundle 'vim-scripts/a.vim'
+        Bundle 'rking/ag.vim'
+        Bundle 'jiangmiao/auto-pairs'
+        Bundle 'kien/ctrlp.vim'
+        Bundle 'kien/rainbow_parentheses.vim'
+        Bundle 'tpope/vim-fugitive'
+        Bundle 'tpope/vim-surround'
+        Bundle 'scrooloose/nerdcommenter'
+        Bundle 'scrooloose/nerdtree'
+        Bundle 'scrooloose/syntastic'
+        Bundle 'altercation/vim-colors-solarized'
+        Bundle 'godlygeek/tabular'
+        Bundle 'bronson/vim-trailing-whitespace'
+        Bundle 'jtsao22/ultisnips'
+        Bundle 'bling/vim-airline'
+        Bundle 'hynek/vim-python-pep8-indent'
 
     " Ultisnips
         let g:UltiSnipsExpandTrigger="<c-j>"
