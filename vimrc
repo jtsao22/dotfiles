@@ -31,6 +31,7 @@
     set list                        " Show tabs;
     set listchars=tab:>-,trail:-    " Show tabs"
     set tags=tags;                  " look for tags file in parent folders
+    set splitright                  " Split to the right
 
     highlight ColorColumn ctermbg=lightblue guibg=lightblue
 
@@ -73,7 +74,7 @@ set cino=N-s
     au BufRead *.vis so %
 
 " Automatically change to the current directory that the file is located in.
-    "autocmd BufEnter * silent! lcd %:p:h
+    autocmd BufEnter * silent! lcd %:p:h
 
 " Source vimrc file after saving it
     if has("autocmd")
@@ -96,22 +97,15 @@ set cino=N-s
 
 " Plugins
 
-    " Pathogen support
-        "call pathogen#infect()
-        "filetype on
-        "filetype plugin on
-
     " Vundle support
         set nocompatible
         filetype off
-        set runtimepath+=~/dotfiles/vim/bundle/Vundle.vim
-        call vundle#rc()
+        set runtimepath+=~/.vim/bundle/Vundle.vim
+        call vundle#begin()
 
-        Bundle 'gmarik/vundle'
         filetype on
 
-        Bundle 'vim-scripts/AutoComplPop'
-        Bundle 'vim-scripts/OmniCppComplete'
+        Bundle 'VundleVim/Vundle.vim'
         Bundle 'vim-scripts/a.vim'
         Bundle 'rking/ag.vim'
         Bundle 'jiangmiao/auto-pairs'
@@ -128,6 +122,13 @@ set cino=N-s
         Bundle 'jtsao22/ultisnips'
         Bundle 'bling/vim-airline'
         Bundle 'hynek/vim-python-pep8-indent'
+        Bundle 'airblade/vim-gitgutter'
+        Bundle 'haya14busa/incsearch.vim'
+        Bundle 'Valloric/YouCompleteMe'
+
+        call vundle#end()
+        filetype plugin on
+        filetype plugin indent on
 
     " Ultisnips
         let g:UltiSnipsExpandTrigger="<c-j>"
@@ -143,30 +144,38 @@ set cino=N-s
         " Close vim if the only window left open is NERDTree
         autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 
+    " Supertab
+    "let g:SuperTabDefaultCompletionType='<C-X><C-U>'
+
     " OmniCppComplete
         " Configure tabs from tag location
-        set tags+=~/.vim/bundle/OmniCppComplete/tags/cpp
-        " build tags of project with Ctrl-F12
-        map <C-F12> :!ctags -R --sort=yes --c++-kinds=+p --fields=+iaS --extra=+q .<CR>
+        " set tags+=~/.vim/bundle/OmniCppComplete/tags/cpp
+        " " build tags of project with Ctrl-F12
+        " map <C-F12> :!ctags -R --sort=yes --c++-kinds=+p --fields=+iaS --extra=+q .<CR>
 
-        " Configure OmniCppComplete
-        let OmniCpp_NamespaceSearch = 1
-        let OmniCpp_GlobalScopeSearch = 1
-        let OmniCpp_ShowAccess = 1
-        let OmniCpp_ShowPrototypeInAbbr = 1 " show function parameters
-        let OmniCpp_MayCompleteDot = 1 " autocomplete after .
-        let OmniCpp_MayCompleteArrow = 1 " autocomplete after ->
-        let OmniCpp_MayCompleteScope = 1 " autocomplete after ::
-        let OmniCpp_DefaultNamespaces = ["std", "_GLIBCXX_STD"]
-        " automatically open and close the popup menu / preview window
-        au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
-        set completeopt=menuone,menu,longest,preview"
+        " " Configure OmniCppComplete
+        " let OmniCpp_NamespaceSearch = 1
+        " let OmniCpp_GlobalScopeSearch = 1
+        " let OmniCpp_ShowAccess = 1
+        " let OmniCpp_ShowPrototypeInAbbr = 1 " show function parameters
+        " let OmniCpp_MayCompleteDot = 1 " autocomplete after .
+        " let OmniCpp_MayCompleteArrow = 1 " autocomplete after ->
+        " let OmniCpp_MayCompleteScope = 1 " autocomplete after ::
+        " let OmniCpp_DefaultNamespaces = ["std", "_GLIBCXX_STD"]
+        " " automatically open and close the popup menu / preview window
+        " au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
+        " set completeopt=menuone,menu,longest,preview"
 
     " YouCompleteMe
-        let g:ycm_global_ycm_extra_conf = '/home/jtsao22/.ycm_extra_confg.py'
-        let g:ycm_confirm_extra_conf = 0
+         let g:ycm_global_ycm_extra_conf = '/home/jtsao22/.ycm_extra_confg.py'
+         let g:ycm_confirm_extra_conf = 0
 
     " Add airline powerline fonts
         let g:airline_powerline_fonts = 1
         let g:airline_theme="base16"
         let g:airline#extensions#branch#enabled = 0
+
+    " Incsearch
+        map /  <Plug>(incsearch-forward)
+        map ?  <Plug>(incsearch-backward)
+        map g/ <Plug>(incsearch-stay)
