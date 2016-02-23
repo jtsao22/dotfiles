@@ -9,7 +9,7 @@
 #
 # Please see http://i3wm.org/docs/userguide.html for a complete reference!
 
-set $mod Mod1
+set $mod Mod4
 set $TERMINAL konsole
 
 # Font for window titles. Will also be used by the bar unless a different font
@@ -74,8 +74,8 @@ bindsym $mod+f fullscreen
 # Go to workspace with urgent window
 bindsym $mod+U [urgent="last"] focus
 
-assign [class="firefox"] 6
-bindsym $mod+g [class="firefox"] focus
+assign [class="google-chrome"] 1
+bindsym $mod+g [class="google-chrome"] focus
 
 # change container layout (stacked, tabbed, toggle split)
 bindsym $mod+s layout stacking
@@ -212,16 +212,23 @@ bindsym XF86AudioRaiseVolume exec amixer -q set Master 2dB+ unmute
 bindsym XF86AudioLowerVolume exec amixer -q set Master 2dB- unmute
 bindsym XF86AudioMute exec amixer -q set Master toggle
 
+# Spotify media keys
+bindsym XF86AudioPlay exec "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause"
+bindsym XF86AudioStop exec "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Stop"
+bindsym XF86AudioPrev exec "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Previous"
+bindsym XF86AudioNext exec "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next"
+
 # startup applications
-exec --no-startup-id i3-msg 'workspace 1; exec konsole;'
-exec --no-startup-id i3-msg 'workspace 6; exec firefox;'
-exec --no-startup-id dropbox start
+exec --no-startup-id i3-msg 'workspace 6; exec konsole;'
+exec --no-startup-id i3-msg 'workspace 1; exec google-chrome;'
+exec --no-startup-id ionice -c 3 dropbox start -i && cpulimit -b -e dropbox -l 20
 exec --no-startup-id caffeine
-exec --no-startup-id synergy
 exec --no-startup-id nm-applet
 exec --no-startup-id gnome-sound-applet
 exec --no-startup-id feh --bg-scale ~/.i3/background.jpg
 
+for_window [class="^Spotify$"] floating enable
+for_window [window_role="pop-up"] floating enable
 
 # Set focus color
 # class                 border  backgr. text    indicator
