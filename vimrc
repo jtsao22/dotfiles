@@ -175,7 +175,5 @@ set cino=N-s
         let g:airline_theme="base16"
         let g:airline#extensions#branch#enabled = 0
 
-    " Incsearch
-        map /  <Plug>(incsearch-forward)
-        map ?  <Plug>(incsearch-backward)
-        map g/ <Plug>(incsearch-stay)
+    " nvim
+    let g:python_host_prog = '/usr/bin/python'
