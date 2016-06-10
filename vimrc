@@ -1,9 +1,9 @@
 " Jason Tsao's VIMRC file "
 
 " Configuration Variables
-    set tw=100                      " Default textwidth
-    set ts=4                        " Default tabstop
-    set et                          " Expand tabs into spaces
+    set textwidth=100               " Default textwidth
+    set tabstop=4                   " Default tabstop
+    set expandtab                   " Expand tabs into spaces
     set shiftwidth=4                " Set default tab width to 4
     set bs=indent,eol,start         " Allow backspacing over EVERYTHING in insert mode
     set ww=[,],<,>,h,l,b,s          " Allow movement commands to wrap
@@ -27,7 +27,7 @@
     set gdefault                    " the /g flag on :s substitutions by default
     set wildmenu                    " Use builtin wildmenu function
     set colorcolumn=100             " Add colorcolumn
-    set enc=utf-8                   " utf-8 encoding
+    set fileencodings=utf-8         " utf-8 encoding
     set list                        " Show tabs;
     set listchars=tab:>-,trail:-    " Show tabs"
     set tags=tags;                  " look for tags file in parent folders
@@ -105,26 +105,28 @@ set cino=N-s
 
         filetype on
 
-        Bundle 'VundleVim/Vundle.vim'
-        Bundle 'vim-scripts/a.vim'
-        Bundle 'rking/ag.vim'
-        Bundle 'jiangmiao/auto-pairs'
-        Bundle 'kien/ctrlp.vim'
-        Bundle 'kien/rainbow_parentheses.vim'
-        Bundle 'tpope/vim-fugitive'
-        Bundle 'tpope/vim-surround'
-        Bundle 'scrooloose/nerdcommenter'
-        Bundle 'scrooloose/nerdtree'
-        Bundle 'scrooloose/syntastic'
-        Bundle 'altercation/vim-colors-solarized'
-        Bundle 'godlygeek/tabular'
-        Bundle 'bronson/vim-trailing-whitespace'
-        Bundle 'jtsao22/ultisnips'
-        Bundle 'bling/vim-airline'
-        Bundle 'hynek/vim-python-pep8-indent'
-        Bundle 'airblade/vim-gitgutter'
-        Bundle 'haya14busa/incsearch.vim'
-        Bundle 'Valloric/YouCompleteMe'
+        Plugin 'VundleVim/Vundle.vim'
+        Plugin 'vim-scripts/a.vim'
+        Plugin 'rking/ag.vim'
+        Plugin 'jiangmiao/auto-pairs'
+        Plugin 'kien/ctrlp.vim'
+        Plugin 'kien/rainbow_parentheses.vim'
+        Plugin 'tpope/vim-fugitive'
+        Plugin 'tpope/vim-surround'
+        Plugin 'scrooloose/nerdcommenter'
+        Plugin 'scrooloose/nerdtree'
+        Plugin 'scrooloose/syntastic'
+        Plugin 'altercation/vim-colors-solarized'
+        Plugin 'godlygeek/tabular'
+        Plugin 'bronson/vim-trailing-whitespace'
+        Plugin 'jtsao22/ultisnips'
+        Plugin 'vim-airline/vim-airline'
+        Plugin 'vim-airline/vim-airline-themes'
+        Plugin 'hynek/vim-python-pep8-indent'
+        Plugin 'airblade/vim-gitgutter'
+        Plugin 'haya14busa/incsearch.vim'
+        Plugin 'Valloric/YouCompleteMe'
+        Plugin 'Yggdroot/indentLine'
 
         call vundle#end()
         filetype plugin on
@@ -177,3 +179,14 @@ set cino=N-s
 
     " nvim
     let g:python_host_prog = '/usr/bin/python'
+
+    " Eclim
+    let g:EclimCompletionMethod = 'omnifunc'
+    map <leader>j :JavaImportOrganize<CR>;
+
+    " Ctrlp
+    map <leader>f <C-P><C-\>w
+
+" Android.mk should not use tabs - must be performed after Vundle
+autocmd BufRead,BufNewFile Android.mk setlocal expandtab tabstop=4 shiftwidth=4
+autocmd Filetype java setlocal expandtab tabstop=4 shiftwidth=4
