@@ -67,6 +67,10 @@ set cino=N-s
     autocmd FileType c,cpp,css,java,javascript,perl,php
         \ noremap ; :s/\([^;]\)$/\1;/<cr>:nohls<cr>
 
+" For json files, don't conceal (quotes etc)
+    autocmd FileType json
+        \ set conceallevel=0
+
 " save sessions with .vis extension
     map <leader>s :mksession!  session.vis<CR>
 
