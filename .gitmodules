@@ -4,9 +4,6 @@
 [submodule "vim/bundle/Vundle.vim"]
 	path = vim/bundle/Vundle.vim
 	url = https://github.com/gmarik/Vundle.vim.git
-[submodule "bash_it/.bash_it"]
-	path = bash_it/.bash_it
-	url = git@github.com:jtsao22/bash-it.git
 [submodule "dircolors/.dircolors"]
 	path = dircolors/.dircolors
 	url = git@github.com:seebi/dircolors-solarized.git
