@@ -1,0 +1,17 @@
+# Setup dual monitors
+exec_always --no-startup-id xrandr --output DVI-I-1 --mode 2560x1440
+exec_always --no-startup-id xrandr --output DP-1 --mode 1920x1080 --right-of DVI-I-1
+exec_always --no-startup-id xrandr --output DP-2 --mode 1920x1200 --right-of DP-1
+
+
+# Workspace settings
+workspace 1 output DVI-I-1
+workspace 2 output DVI-I-1
+workspace 3 output DVI-I-1
+workspace 4 output DVI-I-1
+workspace 5 output DVI-I-1
+workspace 6 output DP-1
+workspace 7 output DP-1
+workspace 8 output DP-1
+workspace 9 output DP-1
+workspace 10 output DP-2
