@@ -1,5 +1,4 @@
-config/*
-/vim/bundle/
+/vim/.vim/bundle/
 /vim/.netrwhist
 /i3/background.jpg
 /i3/config.local
