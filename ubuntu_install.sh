@@ -1,4 +1,17 @@
-sudo apt-get install meld git vim synergy i3
+sudo apt-get install meld git vim synergy i3 konsole stow
+
+git submodule init
+git submodule sync
+git submodule update
+
+stow i3
+stow vim
+stow bash_it
+stow dircolors
+stow config
+stow bash
+
+fonts/install.sh
 
 # Linux
 # Zeal
