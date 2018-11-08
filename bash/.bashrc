@@ -11,7 +11,7 @@ export BASH_IT=$HOME/.bash_it
 export BASH_IT_THEME='clean'
 
 # Customize to your needs...
-export PATH=$PATH:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+export PATH=$PATH:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:~/bin
 
 # Set up TERM for good vim awesomeness
 export TERM=xterm-256color
@@ -28,30 +28,14 @@ then
     . ~/.bash_session
 fi
 
+# Case insensitive completion
+bind 'set completion-ignore-case on'
+
 # Autocomplete in sudo mode
 complete -cf sudo
 
 # Activate LS_COLORS in config
 eval `dircolors ~/.dircolors/dircolors.256dark`
 
-# Use bash completion
-if [ -f /etc/bash_completion ]; then
-    source /etc/bash_completion
-
-    # Git autocompletion for aliases
-    __git_complete grm _git_rm
-    __git_complete ga _git_add
-    __git_complete gc _git_commit
-    __git_complete gco _git_checkout
-    __git_complete gpl _git_pull
-    __git_complete gps _git_push
-    __git_complete gd _git_diff
-    __git_complete gl _git_log
-    __git_complete gb _git_branch
-fi
-
-# use ccache
-export USE_CCACHE=1
-
-# ls right away
-ls
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
+[ -f ~/.fzf.bash ] && alias v='vi $(fzf)'
