@@ -1,0 +1,5 @@
+#!/bin/bash
+OLD=$(i3-msg -t 'get_workspaces' | sed -e 's/{"num/\n{"num/g' | grep \"focused\":true | sed -e 's/,"/\n/g' | grep name | cut -d\" -f 3)
+echo "OLD: $OLD"
+i3-input -F "rename workspace \"$OLD\" to %s" -P 'New Name: '
+#i3-msg set $ws2 "2 asdf"
