@@ -63,6 +63,9 @@ set cino=N-s
     " Turn off smartindent for python because it just ain't smart
     au! FileType python setl nosmartindent
 
+    " Limit git commits to 80 columns
+    autocmd FileType gitcommit setlocal textwidth=80
+
 " For programming languages using a semi colon at the end of statement.
     autocmd FileType c,cpp,css,java,javascript,perl,php
         \ noremap ; :s/\([^;]\)$/\1;/<cr>:nohls<cr>
@@ -117,7 +120,8 @@ set cino=N-s
         Plugin 'altercation/vim-colors-solarized'
         Plugin 'godlygeek/tabular'
         Plugin 'bronson/vim-trailing-whitespace'
-        Plugin 'jtsao22/ultisnips'
+        Plugin 'SirVer/ultisnips'
+        Plugin 'honza/vim-snippets'
         Plugin 'vim-airline/vim-airline'
         Plugin 'vim-airline/vim-airline-themes'
         Plugin 'hynek/vim-python-pep8-indent'
@@ -125,6 +129,7 @@ set cino=N-s
         Plugin 'haya14busa/incsearch.vim'
         Plugin 'Valloric/YouCompleteMe'
         Plugin 'Yggdroot/indentLine'
+        Plugin 'autozimu/LanguageClient-neovim'
 
         call vundle#end()
         filetype plugin on
@@ -167,13 +172,24 @@ set cino=N-s
         " set completeopt=menuone,menu,longest,preview"
 
     " YouCompleteMe
-         let g:ycm_global_ycm_extra_conf = '/home/jtsao22/.ycm_extra_confg.py'
-         let g:ycm_confirm_extra_conf = 0
+        " Setup YouCompleteMe compilation database with bear
+        nnoremap <leader>d :YcmCompleter GoTo<CR>
+
+    " Cquery
+        let g:LanguageClient_serverCommands = {
+                    \ 'cpp': ['/home/local/ANT/jtsao/src/cquery/build/release/bin/cquery',
+                    \ '--log-file=/tmp/cq.log',
+                    \ '--init={"cacheDirectory":"/var/cquery/"}']
+                    \ }
 
     " Add airline powerline fonts
         let g:airline_powerline_fonts = 1
         let g:airline_theme="base16"
         let g:airline#extensions#branch#enabled = 0
+
+    " fzf
+    set rtp+=~/.fzf
+    nnoremap <leader>f :FZF<cr>
 
     " nvim
     let g:python_host_prog = '/usr/bin/python'
@@ -183,7 +199,7 @@ set cino=N-s
     map <leader>j :JavaImportOrganize<CR>;
 
     " Ctrlp
-    map <leader>f <C-P><C-\>w
+    "map <leader>f <C-P><C-\>w
 
 " Android.mk should not use tabs - must be performed after Vundle
 autocmd BufRead,BufNewFile Android.mk setlocal expandtab tabstop=4 shiftwidth=4
