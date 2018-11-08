@@ -72,12 +72,6 @@ bindsym $mod+Shift+v split h
 bindsym $mod+f fullscreen
 
 # Go to workspace with urgent window
-bindsym $mod+U [urgent="last"] focus
-
-assign [class="google-chrome"] 1
-bindsym $mod+g [class="google-chrome"] focus
-
-# change container layout (stacked, tabbed, toggle split)
 bindsym $mod+s layout stacking
 bindsym $mod+w layout tabbed
 bindsym $mod+e layout toggle split
@@ -94,29 +88,43 @@ bindsym $mod+a focus parent
 # focus the child container
 #bindsym $mod+d focus child
 
+set $ws1 "1 code"
+set $ws2 "2 code"
+set $ws3 "3 code"
+set $ws4 "4 code"
+set $ws5 "5 code"
+set $ws6 "6 www"
+set $ws7 "7 code"
+set $ws8 "8 code"
+set $ws9 "9 code"
+set $ws10 "10 code"
+
 # switch to workspace
-bindsym $mod+1 workspace 1
-bindsym $mod+2 workspace 2
-bindsym $mod+3 workspace 3
-bindsym $mod+4 workspace 4
-bindsym $mod+5 workspace 5
-bindsym $mod+6 workspace 6
-bindsym $mod+7 workspace 7
-bindsym $mod+8 workspace 8
-bindsym $mod+9 workspace 9
-bindsym $mod+0 workspace 10
+bindsym $mod+1 workspace number 1
+bindsym $mod+2 workspace number 2
+bindsym $mod+3 workspace number 3
+bindsym $mod+4 workspace number 4
+bindsym $mod+5 workspace number 5
+bindsym $mod+6 workspace number 6
+bindsym $mod+7 workspace number 7
+bindsym $mod+8 workspace number 8
+bindsym $mod+9 workspace number 9
+bindsym $mod+0 workspace number 10
 
 # move focused container to workspace
-bindsym $mod+Shift+exclam move workspace 1
-bindsym $mod+Shift+at move workspace 2
-bindsym $mod+Shift+numbersign move workspace 3
-bindsym $mod+Shift+dollar move workspace 4
-bindsym $mod+Shift+percent move workspace 5
-bindsym $mod+Shift+asciicircum move workspace 6
-bindsym $mod+Shift+ampersand move workspace 7
-bindsym $mod+Shift+asterisk move workspace 8
-bindsym $mod+Shift+parenleft move workspace 9
-bindsym $mod+Shift+parenright move workspace 10
+bindsym $mod+Shift+exclam move container to workspace number 1
+bindsym $mod+Shift+at move container to workspace number 2
+bindsym $mod+Shift+numbersign move container workspace number 3
+bindsym $mod+Shift+dollar move container to workspace number 4
+bindsym $mod+Shift+percent move container to workspace number 5
+bindsym $mod+Shift+asciicircum move container to workspace number 6
+bindsym $mod+Shift+ampersand move container to workspace number 7
+bindsym $mod+Shift+asterisk move container to workspace number 8
+bindsym $mod+Shift+parenleft move container to workspace number 9
+bindsym $mod+Shift+parenright move container to workspace number 10
+
+# Rename the current workspace
+bindsym $mod+period exec --no-startup-id "~/.i3/i3scripts/i3-rename-workspace"
 
 # Toggle movement
 #bindsym $mod+a move workspace prev
@@ -134,11 +142,17 @@ bindsym $mod+Ctrl+l focus output right
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
+    #mode hide
     position top
-    status_command i3status
+    font pango:DejaVuSansMono Nerd Font, Bold 9
+    #font pango:FontAwesome 10
+    #status_command i3status
+    status_command ~/src/bumblebee-status/bumblebee-status -m nic disk:root cpu memory pasink brightness battery date time -p root.path=/ time.format="%I:%M" date.format="%a, %b %d %Y" -t solarized-powerline
+
     colors {
-        background #232323
-        statusline #DCDCDC
+#R       background #232323
+        background #002b36
+        #statusline #DCDCDC
     }
 }
 
@@ -146,6 +160,16 @@ bar {
 bindsym $mod+Shift+F reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+R restart
+# reload displays
+bindsym $mod+Shift+A exec autorandr --change
+# Load mobile
+bindsym $mod+Shift+M exec autorandr -l mobile -f
+# Load docked
+bindsym $mod+Shift+N exec autorandr -l docked -f
+# Load home
+bindsym $mod+Shift+O exec pydetect.py DP2 eDP1 HDMI1
+#bindsym $mod+Shift+O exec autorandr -l home -f
+#bindsym $mod+Shift+O exec ~/.i3/i3scripts/home
 # exit i3 (logs you out of your X session)
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
 
@@ -208,11 +232,12 @@ bindsym $mod+Ctrl+k mode "$mode_system"
 new_window 1pixel
 
 # Volume/Mute Buttons
-bindsym XF86AudioRaiseVolume exec amixer -q set Master 2dB+ unmute
-bindsym XF86AudioLowerVolume exec amixer -q set Master 2dB- unmute
-bindsym XF86AudioMute exec amixer -q set Master toggle
-bindsym $mod+minus exec amixer -q set Master 2dB- unmute
-bindsym $mod+plus exec amixer -q set Master 2dB+ unmute
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl -- set-sink-volume 0 +5%
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl -- set-sink-volume 0 -5%
+bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle
+
+bindsym $mod+minus exec pactl -- set-sink-volume 0 -5%
+bindsym $mod+plus exec pactl -- set-sink-volume 0 +5%
 
 # Spotify media keys
 bindsym XF86AudioPlay exec "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause"
@@ -220,19 +245,42 @@ bindsym XF86AudioStop exec "dbus-send --print-reply --dest=org.mpris.MediaPlayer
 bindsym XF86AudioPrev exec "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Previous"
 bindsym XF86AudioNext exec "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next"
 
+# Screen brightness controls
+bindsym XF86MonBrightnessUp exec "xbacklight -inc 5"
+bindsym XF86MonBrightnessDown exec "xbacklight -dec 5"
+
 # startup applications
 exec --no-startup-id i3-msg 'workspace 6; exec konsole;'
-exec --no-startup-id i3-msg 'workspace 1; exec google-chrome;'
-# exec --no-startup-id ionice -c 3 dropbox start -i && cpulimit -b -e dropbox -l 20
+exec --no-startup-id i3-msg 'workspace 1; exec firefox;'
+# exec --no-startup-id ionice -c 2 dropbox start -i && cpulimit -b -e dropbox -l 20
 exec --no-startup-id dropbox start -i
 exec --no-startup-id caffeine
 exec --no-startup-id nm-applet
 exec --no-startup-id gnome-sound-applet
-exec --no-startup-id feh --bg-scale ~/.i3/background.jpg
+exec --no-startup-id synergy
+exec --no-startup-id pavucontrol
+exec --no-startup-id blueman-applet
+#exec --no-startup-id feh --bg-scale ~/.i3/background.jpg
+exec --no-startup-id feh --randomize --bg-scale ~/.wallpapers
+#exec --no-startup-id compton --config ~/.config/compton.conf -b
+exec --no-startup-id compton -CGb --backend glx --vsync opengl
 
-for_window [class="^Spotify$"] floating enable
 for_window [window_role="pop-up"] floating enable
+
+bindsym $mod+g [class="Google-chrome"] focus
 
 # Set focus color
 # class                 border  backgr. text    indicator
 client.focused          #4c7899 #00ffff #ffffff #2e9ef4
+
+# Workspace settings
+workspace 1 output HDMI1
+workspace 2 output HDMI1
+workspace 3 output HDMI1
+workspace 4 output HDMI1
+workspace 5 output HDMI1
+workspace 6 output DP2-1
+workspace 7 output DP2-1
+workspace 8 output DP2-1
+workspace 9 output DP2-1
+workspace 10 output DP2-1
