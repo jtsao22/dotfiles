@@ -1,22 +1,37 @@
-sudo apt-get install meld git vim synergy i3 konsole stow
+set -e
+
+# Install neovim source list
+sudo add-apt-repository ppa:neovim-ppa/stable
+
+# Install sublime-text source list
+wget -qO - https://download.sublimetext.com/sublimehq-pub.gpg | sudo apt-key add -
+sudo apt-get install apt-transport-https
+echo "deb https://download.sublimetext.com/ apt/stable/" | sudo tee /etc/apt/sources.list.d/sublime-text.list
+
+sudo apt-get update
+sudo apt-get install meld git vim synergy konsole stow feh sublime-text neovim xclip tig
 
 git submodule init
 git submodule sync
 git submodule update
 
-stow i3
-stow vim
-stow bash_it
-stow dircolors
-stow config
-stow bash
+# Backup old bashrc
+if [ -e ~/.bashrc ]; then
+    mv ~/.bashrc ~/.bashrc_backup
+fi
+
+stow --target=$HOME i3
+stow --target=$HOME vim
+stow --target=$HOME bash_it
+stow --target=$HOME dircolors
+stow --target=$HOME config
+stow --target=$HOME bash
 
 fonts/install.sh
 
 # Linux
 # Zeal
 # Sublime Text
-# DejaVu fonts (http://sourceforge.net/projects/dejavu/)
 
 # Mac coreutils includes ls & grep
 #brew install coreutils
@@ -34,18 +49,35 @@ gsettings set org.gnome.desktop.background show-desktop-icons false
 #gtk-icon-theme-name = Faenza-Dark
 
 
-# Install latest i3:
-# echo "deb http://debian.sur5r.net/i3/ $(lsb_release -c -s) universe" >> /etc/apt/sources.list
-# apt-get update
-# apt-get --allow-unauthenticated install sur5r-keyring
-# apt-get update
-# apt-get install i3
+# Install latest i3 from https://i3wm.org/docs/repositories.html
+/usr/lib/apt/apt-helper download-file http://debian.sur5r.net/i3/pool/main/s/sur5r-keyring/sur5r-keyring_2018.01.30_all.deb keyring.deb SHA256:baa43dbbd7232ea2b5444cae238d53bebb9d34601cc000e82f11111b1889078a
+sudo dpkg -i ./keyring.deb
+echo "deb http://debian.sur5r.net/i3/ $(grep '^DISTRIB_CODENAME=' /etc/lsb-release | cut -f2 -d=) universe" | sudo tee /etc/apt/sources.list.d/sur5r-i3.list
+sudo apt update
+sudo apt install i3
 
-# Install solarized theme for konsole
-if [ -d ~/.kde4 ]; then
-  wget -qO ~/.kde4/share/apps/konsole/Solarized\ Light.colorscheme "https://raw.github.com/phiggins/konsole-colors-solarized/master/Solarized%20Light.colorscheme"
-  wget -qO ~/.kde4/share/apps/konsole/Solarized\ Dark.colorscheme "https://raw.github.com/phiggins/konsole-colors-solarized/master/Solarized%20Dark.colorscheme"
-else
-  wget -qO ~/.kde/share/apps/konsole/Solarized\ Light.colorscheme "https://raw.github.com/phiggins/konsole-colors-solarized/master/Solarized%20Light.colorscheme"
-  wget -qO ~/.kde/share/apps/konsole/Solarized\ Dark.colorscheme "https://raw.github.com/phiggins/konsole-colors-solarized/master/Solarized%20Dark.colorscheme"
-fi
+ Install solarized theme for konsole
+ if [ -d ~/.kde4 ]; then
+   KONSOLE_COLOR_SCHEME_PATH=~/.kde4/share/apps/konsole/
+ elif [ -d ~/.kde ]; then
+   KONSOLE_COLOR_SCHEME_PATH=~/.kde/share/apps/konsole/
+ else
+   KONSOLE_COLOR_SCHEME_PATH=~/.local/share/konsole/
+ fi
+
+wget -O $KONSOLE_COLOR_SCHEME_PATH/SolarizedLight.colorscheme "https://raw.github.com/phiggins/konsole-colors-solarized/master/Solarized%20Light.colorscheme"
+wget -O $KONSOLE_COLOR_SCHEME_PATH/SolarizedDark.colorscheme "https://raw.github.com/phiggins/konsole-colors-solarized/master/Solarized%20Dark.colorscheme"
+wget -O $KONSOLE_COLOR_SCHEME_PATH/Dracula.colorscheme "https://raw.githubusercontent.com/dracula/konsole/master/Dracula.colorscheme"
+
+mkdir -p ~/src
+pushd ~/src
+
+# Install DejaVu Sans Mono Nerd Font Complete:
+wget -O DejaVu_Sans_Mono.ttf "https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/DejaVuSansMono/Regular/complete/DejaVu%20Sans%20Mono%20Nerd%20Font%20Complete.ttf" && sudo gnome-font-viewer DejaVu_Sans_Mono.ttf && rm DejaVu_Sans_Mono.ttf
+
+# Get bumblebee and its dependencies
+sudo easy_install pip
+sudo pip install netifaces
+git clone https://github.com/tobi-wan-kenobi/bumblebee-status.git
+
+popd
