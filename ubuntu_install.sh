@@ -9,7 +9,7 @@ sudo apt-get install apt-transport-https
 echo "deb https://download.sublimetext.com/ apt/stable/" | sudo tee /etc/apt/sources.list.d/sublime-text.list
 
 sudo apt-get update
-sudo apt-get install meld git vim synergy konsole stow feh sublime-text neovim xclip tig
+sudo apt-get install meld git vim synergy konsole stow feh sublime-text neovim xclip tig blueman caffeine pavucontrol
 
 git submodule init
 git submodule sync
