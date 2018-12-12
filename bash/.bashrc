@@ -28,14 +28,8 @@ then
     . ~/.bash_session
 fi
 
-# Case insensitive completion
-bind 'set completion-ignore-case on'
-
 # Autocomplete in sudo mode
 complete -cf sudo
 
 # Activate LS_COLORS in config
 eval `dircolors ~/.dircolors/dircolors.256dark`
-
-[ -f ~/.fzf.bash ] && source ~/.fzf.bash
-[ -f ~/.fzf.bash ] && alias v='vi $(fzf)'
