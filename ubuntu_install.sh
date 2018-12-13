@@ -11,6 +11,9 @@ echo "deb https://download.sublimetext.com/ apt/stable/" | sudo tee /etc/apt/sou
 sudo apt-get update
 sudo apt-get install meld git vim synergy konsole stow feh sublime-text neovim xclip tig blueman caffeine pavucontrol gsimplecal
 
+# C++-specific installs (required for cquery)
+sudo apt-get install cmake
+
 git submodule init
 git submodule sync
 git submodule update
@@ -34,9 +37,6 @@ fonts/install.sh
 # Zeal
 # Sublime Text
 
-# Mac coreutils includes ls & grep
-#brew install coreutils
-
 # Disable nautilus from starting a window containing the desktop icons:
 gsettings set org.gnome.desktop.background show-desktop-icons false
 
@@ -57,14 +57,14 @@ echo "deb http://debian.sur5r.net/i3/ $(grep '^DISTRIB_CODENAME=' /etc/lsb-relea
 sudo apt update
 sudo apt install i3
 
- Install solarized theme for konsole
- if [ -d ~/.kde4 ]; then
-   KONSOLE_COLOR_SCHEME_PATH=~/.kde4/share/apps/konsole/
- elif [ -d ~/.kde ]; then
-   KONSOLE_COLOR_SCHEME_PATH=~/.kde/share/apps/konsole/
- else
-   KONSOLE_COLOR_SCHEME_PATH=~/.local/share/konsole/
- fi
+# Install solarized theme for konsole
+if [ -d ~/.kde4 ]; then
+    KONSOLE_COLOR_SCHEME_PATH=~/.kde4/share/apps/konsole/
+elif [ -d ~/.kde ]; then
+    KONSOLE_COLOR_SCHEME_PATH=~/.kde/share/apps/konsole/
+else
+    KONSOLE_COLOR_SCHEME_PATH=~/.local/share/konsole/
+fi
 
 wget -O $KONSOLE_COLOR_SCHEME_PATH/SolarizedLight.colorscheme "https://raw.github.com/phiggins/konsole-colors-solarized/master/Solarized%20Light.colorscheme"
 wget -O $KONSOLE_COLOR_SCHEME_PATH/SolarizedDark.colorscheme "https://raw.github.com/phiggins/konsole-colors-solarized/master/Solarized%20Dark.colorscheme"
@@ -76,9 +76,21 @@ pushd ~/src
 # Install DejaVu Sans Mono Nerd Font Complete:
 wget -O DejaVu_Sans_Mono.ttf "https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/DejaVuSansMono/Regular/complete/DejaVu%20Sans%20Mono%20Nerd%20Font%20Complete.ttf" && sudo gnome-font-viewer DejaVu_Sans_Mono.ttf && rm DejaVu_Sans_Mono.ttf
 
-# Get bumblebee and its dependencies
+# Install bumblebee and its dependencies
 sudo easy_install pip
 sudo pip install netifaces
 git clone https://github.com/tobi-wan-kenobi/bumblebee-status.git
+
+# Install cquery (C/C++ language server support) from https://github.com/cquery-project/cquery/wiki/Building-cquery
+# First install clang dependency
+sudo apt-get install clang
+git clone --recursive https://github.com/cquery-project/cquery.git
+pushd cquery
+mkdir build && pushd build
+cmake .. -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=release -DCMAKE_EXPORT_COMPILE_COMMANDS=YES
+cmake --build .
+cmake --build . --target install
+popd
+popd
 
 popd
