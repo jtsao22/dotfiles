@@ -30,8 +30,8 @@ bindsym $mod+Return exec konsole
 # kill focused window
 bindsym $mod+Shift+c kill
 
-# start dmenu (a program launcher)
-bindsym $mod+d exec dmenu_run
+# start rofi instead of dmenu (a program launcher)
+bindsym $mod+d exec --no-startup-id "rofi -combi-modi window,drun,run -show combi -modi combi"
 # There also is the (new) i3-dmenu-desktop which only displays applications
 # shipping a .desktop file. It is a wrapper around dmenu, so you need that
 # installed.

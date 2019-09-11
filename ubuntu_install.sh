@@ -12,8 +12,11 @@ echo "deb https://download.sublimetext.com/ apt/stable/" | sudo tee /etc/apt/sou
 curl -LO https://github.com/BurntSushi/ripgrep/releases/download/11.0.2/ripgrep_11.0.2_amd64.deb
 sudo dpkg -i ripgrep_11.0.2_amd64.deb
 
+# Install rofi ppa
+sudo add-apt-repository ppa:jasonpleau/rofi
+
 sudo apt-get update
-sudo apt-get install meld git vim synergy konsole stow feh sublime-text neovim xclip tig blueman caffeine pavucontrol gsimplecal zeal
+sudo apt-get install meld git vim synergy konsole stow feh sublime-text neovim xclip tig blueman caffeine pavucontrol gsimplecal zeal rofi
 
 # C++-specific installs (required for cquery)
 sudo apt-get install cmake
