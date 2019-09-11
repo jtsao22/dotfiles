@@ -20,7 +20,8 @@ sudo dpkg -i ripgrep_11.0.2_amd64.deb
 sudo add-apt-repository ppa:jasonpleau/rofi
 
 sudo apt-get update
-sudo apt-get install meld git vim synergy konsole stow feh sublime-text neovim xclip tig blueman caffeine pavucontrol gsimplecal zeal rofi
+sudo apt-get install meld git vim synergy konsole stow feh sublime-text neovim xclip tig blueman \
+    caffeine pavucontrol gsimplecal zeal rofi xbacklight
 
 # C++-specific installs (required for cquery)
 sudo apt-get install cmake
