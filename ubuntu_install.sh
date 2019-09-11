@@ -8,8 +8,12 @@ wget -qO - https://download.sublimetext.com/sublimehq-pub.gpg | sudo apt-key add
 sudo apt-get install apt-transport-https
 echo "deb https://download.sublimetext.com/ apt/stable/" | sudo tee /etc/apt/sources.list.d/sublime-text.list
 
+# Install ripgrep: https://github.com/BurntSushi/ripgrep
+curl -LO https://github.com/BurntSushi/ripgrep/releases/download/11.0.2/ripgrep_11.0.2_amd64.deb
+sudo dpkg -i ripgrep_11.0.2_amd64.deb
+
 sudo apt-get update
-sudo apt-get install meld git vim synergy konsole stow feh sublime-text neovim xclip tig blueman caffeine pavucontrol gsimplecal
+sudo apt-get install meld git vim synergy konsole stow feh sublime-text neovim xclip tig blueman caffeine pavucontrol gsimplecal zeal
 
 # C++-specific installs (required for cquery)
 sudo apt-get install cmake
