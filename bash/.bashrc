@@ -33,3 +33,6 @@ complete -cf sudo
 
 # Activate LS_COLORS in config
 eval `dircolors ~/.dircolors/dircolors.256dark`
+
+# Automate ssh-agent startup
+[ -z "$SSH_AUTH_SOCK"  ] && eval "$(ssh-agent -s)"
