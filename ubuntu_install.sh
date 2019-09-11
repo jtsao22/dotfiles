@@ -3,6 +3,10 @@ set -e
 # Install neovim source list
 sudo add-apt-repository ppa:neovim-ppa/stable
 
+# Install fzf
+git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+~/.fzf/install
+
 # Install sublime-text source list
 wget -qO - https://download.sublimetext.com/sublimehq-pub.gpg | sudo apt-key add -
 sudo apt-get install apt-transport-https
