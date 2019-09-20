@@ -250,8 +250,13 @@ bindsym XF86AudioPrev exec "dbus-send --print-reply --dest=org.mpris.MediaPlayer
 bindsym XF86AudioNext exec "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next"
 
 # Screen brightness controls
-bindsym XF86MonBrightnessUp exec "xbacklight -inc 5"
-bindsym XF86MonBrightnessDown exec "xbacklight -dec 5"
+# Lenovo p1: https://askubuntu.com/questions/57236/unable-to-change-brightness-in-a-lenovo-laptop?newreg=17d08be10bcb4b06ba704265fd3d25b5
+bindsym XF86MonBrightnessUp exec "brightness inc"
+bindsym XF86MonBrightnessDown exec "brightness dec"
+
+# Dell 5520
+#bindsym XF86MonBrightnessUp exec "xbacklight -inc 5"
+#bindsym XF86MonBrightnessDown exec "xbacklight -dec 5"
 
 # Screenshot controls
 bindsym Print exec gnome-screenshot -i

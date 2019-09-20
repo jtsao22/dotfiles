@@ -43,6 +43,9 @@ stow --target=$HOME config
 stow --target=$HOME bash
 stow --target=$HOME inputrc
 
+# Install usr_local_bin folder to /usr/local/bin
+sudo cp usr_local_bin/* /usr/local/bin
+
 fonts/install.sh
 
 # Linux
