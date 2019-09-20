@@ -262,8 +262,8 @@ bindsym XF86MonBrightnessDown exec "brightness dec"
 bindsym Print exec gnome-screenshot -i
 
 # startup applications
-exec --no-startup-id i3-msg 'workspace 6; exec konsole;'
-exec --no-startup-id i3-msg 'workspace 1; exec firefox;'
+exec --no-startup-id i3-msg 'workspace 1; exec konsole;'
+exec --no-startup-id i3-msg 'workspace 6; exec firefox;'
 # exec --no-startup-id ionice -c 2 dropbox start -i && cpulimit -b -e dropbox -l 20
 exec --no-startup-id dropbox start -i
 exec --no-startup-id caffeine
