@@ -42,8 +42,7 @@ set cino=N-s
     vmap <C-c> y:call system("xclip -i -selection clipboard", getreg("\""))<CR>:call system("xclip -i", getreg("\""))<CR>
 
 " Enable pasting
-" from: http://vim.wikia.com/wiki/In_line_copy_and_paste_to_system_clipboard
-    imap <C-v> ^O:set paste<Enter>^R+^O:set nopaste<Enter>
+    nmap <leader>p "*]p
 
 " Visual shifting (does not exit Visual Mode)
     vnoremap < <gv
@@ -76,6 +75,11 @@ set cino=N-s
 
 " save sessions with .vis extension
     map <leader>s :mksession!  session.vis<CR>
+
+" Use <C-L> to clear the highlighting of :set hlsearch.
+    if maparg('<C-L>', 'n') ==# ''
+        nnoremap <silent> <C-L> :nohlsearch<C-R>=has('diff')?'<Bar>diffupdate':''<CR><CR><C-L>
+    endif
 
 " automatically source vim sessions so I can open them with the finder
     au BufRead *.vis so %
@@ -111,7 +115,7 @@ set cino=N-s
         Plugin 'rking/ag.vim'
         Plugin 'jiangmiao/auto-pairs'
         Plugin 'kien/ctrlp.vim'
-        Plugin 'kien/rainbow_parentheses.vim'
+        Plugin 'luochen1990/rainbow'
         Plugin 'tpope/vim-fugitive'
         Plugin 'tpope/vim-surround'
         Plugin 'scrooloose/nerdcommenter'
@@ -130,6 +134,8 @@ set cino=N-s
         Plugin 'Valloric/YouCompleteMe'
         Plugin 'Yggdroot/indentLine'
         Plugin 'autozimu/LanguageClient-neovim'
+        Plugin 'jremmen/vim-ripgrep'
+        Plugin 'junegunn/fzf.vim'
 
         call vundle#end()
         filetype plugin on
@@ -139,6 +145,7 @@ set cino=N-s
         let g:UltiSnipsExpandTrigger="<c-j>"
         let g:UltiSnipsJumpForwardTrigger="<c-j>"
         let g:UltiSnipsJumpBackwardTrigger="<c-k>"
+        let g:UltiSnipsSnippetDirectories=["UltiSnips", "customSnippets"]
 
     " NERDTree
         " Map toggle to leader-e
@@ -190,13 +197,18 @@ set cino=N-s
     " fzf
     set rtp+=~/.fzf
     nnoremap <leader>f :FZF<cr>
+    nnoremap <leader>a :Files $ASRC<cr>
+    nnoremap <leader>c :Files $CSRC<cr>
+    nnoremap <leader>r :Files $RSRC<cr>
+    nnoremap <leader>h :Files expand('%:r')<cr>
+
+    " rainbow
+    let g:rainbow_active = 1
+    " Turn off rainbow for cmakelists since it's screws it up
+    let g:rainbow_conf = {'separately': {'cmake': 0}}
 
     " nvim
     let g:python_host_prog = '/usr/bin/python'
-
-    " Eclim
-    let g:EclimCompletionMethod = 'omnifunc'
-    map <leader>j :JavaImportOrganize<CR>;
 
     " Ctrlp
     "map <leader>f <C-P><C-\>w
