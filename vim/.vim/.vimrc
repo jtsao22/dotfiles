@@ -107,44 +107,45 @@ set cino=N-s
 
 " Plugins
 
-    " Vundle support
-        set nocompatible
-        filetype off
-        set runtimepath+=~/.vim/bundle/Vundle.vim
-        call vundle#begin()
+    " Plug setup
+    set rtp +=~/.vim
+    if empty(glob('~/.vim/autoload/plug.vim'))
+        silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+                    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+        autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+    endif
 
-        filetype on
+    call plug#begin('~/.vim/plugged')
 
-        Plugin 'VundleVim/Vundle.vim'
-        Plugin 'vim-scripts/a.vim'
-        Plugin 'rking/ag.vim'
-        Plugin 'jiangmiao/auto-pairs'
-        Plugin 'kien/ctrlp.vim'
-        Plugin 'luochen1990/rainbow'
-        Plugin 'tpope/vim-fugitive'
-        Plugin 'tpope/vim-surround'
-        Plugin 'scrooloose/nerdcommenter'
-        Plugin 'scrooloose/nerdtree'
-        Plugin 'scrooloose/syntastic'
-        Plugin 'altercation/vim-colors-solarized'
-        Plugin 'godlygeek/tabular'
-        Plugin 'bronson/vim-trailing-whitespace'
-        Plugin 'SirVer/ultisnips'
-        Plugin 'honza/vim-snippets'
-        Plugin 'vim-airline/vim-airline'
-        Plugin 'vim-airline/vim-airline-themes'
-        Plugin 'hynek/vim-python-pep8-indent'
-        Plugin 'airblade/vim-gitgutter'
-        Plugin 'haya14busa/incsearch.vim'
-        Plugin 'Valloric/YouCompleteMe'
-        Plugin 'Yggdroot/indentLine'
-        Plugin 'autozimu/LanguageClient-neovim'
-        Plugin 'jremmen/vim-ripgrep'
-        Plugin 'junegunn/fzf.vim'
+        Plug 'derekwyatt/vim-fswitch'
+        Plug 'rking/ag.vim'
+        Plug 'kien/ctrlp.vim'
+        Plug 'luochen1990/rainbow'
+        Plug 'tpope/vim-fugitive'
+        Plug 'tpope/vim-surround'
+        Plug 'scrooloose/nerdcommenter'
+        Plug 'scrooloose/nerdtree'
+        Plug 'scrooloose/syntastic'
+        Plug 'altercation/vim-colors-solarized'
+        Plug 'godlygeek/tabular'
+        Plug 'bronson/vim-trailing-whitespace'
+        Plug 'SirVer/ultisnips'
+        Plug 'honza/vim-snippets'
+        Plug 'vim-airline/vim-airline'
+        Plug 'vim-airline/vim-airline-themes'
+        Plug 'hynek/vim-python-pep8-indent'
+        Plug 'airblade/vim-gitgutter'
+        Plug 'haya14busa/incsearch.vim'
+        Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
+        Plug 'Yggdroot/indentLine'
+        Plug 'autozimu/LanguageClient-neovim'
+        Plug 'jremmen/vim-ripgrep'
+        Plug 'junegunn/fzf.vim'
 
-        call vundle#end()
-        filetype plugin on
-        filetype plugin indent on
+    call plug#end()
+
+    " FSSwitch
+        map <leader>w :FSSplitRight<CR>
 
     " Ultisnips
         let g:UltiSnipsExpandTrigger="<c-j>"
@@ -154,7 +155,7 @@ set cino=N-s
 
     " NERDTree
         " Map toggle to leader-e
-        map <leader>e :NERDTreeToggle<CR>;
+        map <leader>e :NERDTreeToggle<CR>
         "autocmd VimEnter * NERDTree                             " Open NERDTree automatically;
         "autocmd VimEnter * wincmd w                             " Place cursor in the correct window;
         "autocmd VimEnter * if !argc() | NERDTree | endif        " Open NERDTree if no files specified;
