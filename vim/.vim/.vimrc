@@ -119,7 +119,6 @@ set cino=N-s
 
         Plug 'derekwyatt/vim-fswitch'
         Plug 'rking/ag.vim'
-        Plug 'kien/ctrlp.vim'
         Plug 'luochen1990/rainbow'
         Plug 'tpope/vim-fugitive'
         Plug 'tpope/vim-surround'
@@ -202,7 +201,8 @@ set cino=N-s
 
     " fzf
     set rtp+=~/.fzf
-    nnoremap <leader>f :FZF<cr>
+    nnoremap <C-p> :Files<cr>
+    nnoremap <leader>f :Files<cr>
     nnoremap <leader>a :Files $ASRC<cr>
     nnoremap <leader>c :Files $CSRC<cr>
     nnoremap <leader>r :Files $RSRC<cr>
@@ -215,9 +215,6 @@ set cino=N-s
 
     " nvim
     let g:python_host_prog = '/usr/bin/python'
-
-    " Ctrlp
-    "map <leader>f <C-P><C-\>w
 
 " Android.mk should not use tabs - must be performed after Vundle
 autocmd BufRead,BufNewFile Android.mk setlocal expandtab tabstop=4 shiftwidth=4
