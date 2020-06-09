@@ -32,6 +32,8 @@
     set listchars=tab:>-,trail:-    " Show tabs"
     set tags=tags;                  " look for tags file in parent folders
     set splitright                  " Split to the right
+    set undodir=~/.vim/undodir       " Setup undo across sessions
+    set undofile                    " Setup undo across sessions
 
     highlight ColorColumn ctermbg=lightblue guibg=lightblue
 
