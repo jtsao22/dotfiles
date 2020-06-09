@@ -89,6 +89,9 @@ set cino=N-s
 " Automatically change to the current directory that the file is located in.
     autocmd BufEnter * silent! lcd %:p:h
 
+" Automatically resize when the window changes
+    autocmd VimResized * wincmd =
+
 " Source vimrc file after saving it
     if has("autocmd")
         autocmd! bufwritepost .vimrc source $MYVIMRC
