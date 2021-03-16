@@ -1,6 +1,5 @@
-" Jason Tsao's VIMRC file "
-
 " Configuration Variables
+    let mapleader=" "             " Set leader key to space
     set textwidth=100               " Default textwidth
     set tabstop=4                   " Default tabstop
     set expandtab                   " Expand tabs into spaces
@@ -34,6 +33,7 @@
     set splitright                  " Split to the right
     set undodir=~/.vim/undodir       " Setup undo across sessions
     set undofile                    " Setup undo across sessions
+    set termguicolors               " Use true (24-bit) colors
 
     highlight ColorColumn ctermbg=lightblue guibg=lightblue
 
@@ -75,9 +75,6 @@ set cino=N-s
     autocmd FileType json
         \ set conceallevel=0
 
-" save sessions with .vis extension
-    map <leader>s :mksession!  session.vis<CR>
-
 " Use <C-L> to clear the highlighting of :set hlsearch.
     if maparg('<C-L>', 'n') ==# ''
         nnoremap <silent> <C-L> :nohlsearch<C-R>=has('diff')?'<Bar>diffupdate':''<CR><CR><C-L>
@@ -100,11 +97,6 @@ set cino=N-s
 " Type \v for easy access to vimrc editting
     nmap <leader>v :tabedit $MYVIMRC<CR>
 
-" Set 256 color mode
-    set t_Co=256
-    syntax enable
-    set background=dark
-
 " Plugins
 
     " Plug setup
@@ -125,7 +117,8 @@ set cino=N-s
         Plug 'scrooloose/nerdcommenter'
         Plug 'scrooloose/nerdtree'
         Plug 'scrooloose/syntastic'
-        Plug 'altercation/vim-colors-solarized'
+        Plug 'lifepillar/vim-solarized8'
+        Plug 'octol/vim-cpp-enhanced-highlight'
         Plug 'godlygeek/tabular'
         Plug 'bronson/vim-trailing-whitespace'
         Plug 'SirVer/ultisnips'
@@ -135,16 +128,29 @@ set cino=N-s
         Plug 'hynek/vim-python-pep8-indent'
         Plug 'airblade/vim-gitgutter'
         Plug 'haya14busa/incsearch.vim'
-        Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
+        Plug 'haya14busa/incsearch-fuzzy.vim'
+        Plug 'haya14busa/incsearch-easymotion.vim'
+        Plug 'easymotion/vim-easymotion'
+        "Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
         Plug 'Yggdroot/indentLine'
         Plug 'autozimu/LanguageClient-neovim'
         Plug 'jremmen/vim-ripgrep'
+        Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
         Plug 'junegunn/fzf.vim'
+        "Plug 'airblade/vim-rooter'
+        Plug 'dense-analysis/ale'
+        Plug 'neoclide/coc.nvim', {'branch': 'release'}
+        Plug 'KabbAmine/zeavim.vim'
+        Plug 'sonph/onehalf', {'rtp': 'vim/'}
+        Plug 'aklt/plantuml-syntax'
+        Plug 'rhysd/vim-clang-format'
+        Plug 'dracula/vim', { 'as': 'dracula' }
 
     call plug#end()
 
     " FSSwitch
         map <leader>w :FSSplitRight<CR>
+        map <leader>h :FSHere<CR>
 
     " Ultisnips
         let g:UltiSnipsExpandTrigger="<c-j>"
@@ -161,29 +167,11 @@ set cino=N-s
         " Close vim if the only window left open is NERDTree
         autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 
-    " Supertab
-    "let g:SuperTabDefaultCompletionType='<C-X><C-U>'
-
-    " OmniCppComplete
-        " Configure tabs from tag location
-        " set tags+=~/.vim/bundle/OmniCppComplete/tags/cpp
-        " " build tags of project with Ctrl-F12
-        " map <C-F12> :!ctags -R --sort=yes --c++-kinds=+p --fields=+iaS --extra=+q .<CR>
-
-        " " Configure OmniCppComplete
-        " let OmniCpp_NamespaceSearch = 1
-        " let OmniCpp_GlobalScopeSearch = 1
-        " let OmniCpp_ShowAccess = 1
-        " let OmniCpp_ShowPrototypeInAbbr = 1 " show function parameters
-        " let OmniCpp_MayCompleteDot = 1 " autocomplete after .
-        " let OmniCpp_MayCompleteArrow = 1 " autocomplete after ->
-        " let OmniCpp_MayCompleteScope = 1 " autocomplete after ::
-        " let OmniCpp_DefaultNamespaces = ["std", "_GLIBCXX_STD"]
-        " " automatically open and close the popup menu / preview window
-        " au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
-        " set completeopt=menuone,menu,longest,preview"
-
     " YouCompleteMe
+        " Let clangd fully control code completion
+        "let g:ycm_clangd_uses_ycmd_caching = 0
+        " Use installed clangd, not YCM-bundled clangd which doesn't get updates.
+        let g:ycm_clangd_binary_path = exepath("clangd-6.0")
         " Setup YouCompleteMe compilation database with bear
         nnoremap <leader>d :YcmCompleter GoTo<CR>
 
@@ -196,17 +184,28 @@ set cino=N-s
 
     " Add airline powerline fonts
         let g:airline_powerline_fonts = 1
-        let g:airline_theme="base16"
+        "let g:airline_theme="base16"
+        let g:airline_theme="onehalfdark"
         let g:airline#extensions#branch#enabled = 0
 
     " fzf
-    set rtp+=~/.fzf
-    nnoremap <C-p> :Files<cr>
-    nnoremap <leader>f :Files<cr>
-    nnoremap <leader>a :Files $ASRC<cr>
-    nnoremap <leader>c :Files $CSRC<cr>
-    nnoremap <leader>r :Files $RSRC<cr>
-    nnoremap <leader>h :Files expand('%:r')<cr>
+        " Default ctrl-p should search from git root
+        function! s:find_git_root()
+            return system('git rev-parse --show-toplevel 2> /dev/null')[:-2]
+        endfunction
+
+        command! ProjectFiles execute 'Files' s:find_git_root()
+
+        set rtp+=~/.fzf
+        nnoremap <C-p> :ProjectFiles<cr>
+        nnoremap <leader>f :Files<cr>
+        nnoremap <leader>a :Files $ASRC<cr>
+        nnoremap <leader>c :Files $CSRC<cr>
+        nnoremap <leader>r :Files $RSRC<cr>
+        nnoremap <leader>p :Files $PSRC<cr>
+        nnoremap <leader>s :Files $SSRC<cr>
+        nnoremap <leader>n :Files $VSRC<cr>
+
 
     " rainbow
     let g:rainbow_active = 1
@@ -216,9 +215,71 @@ set cino=N-s
     " nvim
     let g:python_host_prog = '/usr/bin/python'
 
+    " coc
+    " GoTo code navigation.
+    nmap <silent> gd <Plug>(coc-definition)
+    nmap <silent> gy <Plug>(coc-type-definition)
+    nmap <silent> gi <Plug>(coc-implementation)
+    nmap <silent> gr <Plug>(coc-references)
+
+    " Zeal
+    nmap <leader>z <Plug>Zeavim
+
+    " Plantuml-syntax
+    let g:plantuml_set_makeprg = '/usr/local/bin/makeDiagram.sh'
+
+    " Plantuml previewer
+    nnoremap <leader>r :PlantumlOpen
+
+    " vim-clang-format
+    g:clang_format#detect_style_file   " Use .clang-format file
+    autocmd FileType c ClangFormatAutoEnable  " auto format C/C++ files on buffer write
+    " map to <Leader>cf in C++ code
+    autocmd FileType c,cpp,objc nnoremap <buffer><Leader>cf :<C-u>ClangFormat<CR>
+    autocmd FileType c,cpp,objc vnoremap <buffer><Leader>cf :ClangFormat<CR>
+
+    " Easymotion
+        " <Leader>f{char} to move to {char}
+        map  <Leader><Leader>f <Plug>(easymotion-bd-f)
+        nmap <Leader><Leader>f <Plug>(easymotion-overwin-f)
+
+        " s{char}{char} to move to {char}{char}
+        nmap s <Plug>(easymotion-overwin-f2)
+
+        " Move to word
+        map  <Leader><Leader>w <Plug>(easymotion-bd-w)
+        nmap <Leader><Leader>w <Plug>(easymotion-overwin-w)
+
+        " Gif config
+        map <Leader><Leader>l <Plug>(easymotion-lineforward)
+        map <Leader><Leader>j <Plug>(easymotion-j)
+        map <Leader><Leader>k <Plug>(easymotion-k)
+        map <Leader><Leader>h <Plug>(easymotion-linebackward)
+
+        let g:EasyMotion_startofline = 0 " keep cursor column when JK motion
+
+    " incsearch-fuzzy
+    map z/ <Plug>(incsearch-fuzzy-/)
+
 " Android.mk should not use tabs - must be performed after Vundle
 autocmd BufRead,BufNewFile Android.mk setlocal expandtab tabstop=4 shiftwidth=4
 autocmd Filetype java setlocal expandtab tabstop=4 shiftwidth=4
 
 " Change the default colorscheme (must be done after Vundle because of solarized plugin)
-    colorscheme solarized
+    "colorscheme solarized8
+    colorscheme dracula
+
+"auto close {
+function! s:CloseBracket()
+    let line = getline('.')
+    if line =~# '^\s*\(struct\|class\|enum\) '
+        return "{\<Enter>};\<Esc>O"
+    elseif searchpair('(', '', ')', 'bmn', '', line('.'))
+        " Probably inside a function call. Close it off.
+        return "{\<Enter>});\<Esc>O"
+    else
+        return "{\<Enter>}\<Esc>O"
+    endif
+endfunction
+inoremap <expr> {<Enter> <SID>CloseBracket()
+

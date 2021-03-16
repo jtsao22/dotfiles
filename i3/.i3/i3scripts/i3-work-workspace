@@ -19,4 +19,5 @@ i3-msg "workspace 7 output DP-0.1"
 i3-msg "workspace 8 output DP-0.1"
 i3-msg "workspace 9 output DP-0.1"
 i3-msg "workspace 10 output DP-0.1"
+~/.config/polybar/launch.sh
 ~/.fehbg
