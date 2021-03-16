@@ -19,6 +19,9 @@ export TERM=xterm-256color
 # Use vim to read man pages
 # export MANPAGER="/bin/sh -c \"col -b | vim -c 'set ft=man ts=8 nomod nolist nonu noma' -\""
 
+#set editing-mode vi
+set -o vi
+
 # Load Bash It
 source $BASH_IT/bash_it.sh
 
@@ -30,6 +33,10 @@ fi
 
 # Autocomplete in sudo mode
 complete -cf sudo
+
+# Change writing to history file mode to append, and save command to history for every cmd
+shopt -s histappend
+PROMPT_COMMAND="history -a;$PROMPT_COMMAND"
 
 # Activate LS_COLORS in config
 eval `dircolors ~/.dircolors/dircolors.256dark`
