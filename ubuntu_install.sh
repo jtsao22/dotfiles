@@ -42,6 +42,7 @@ stow --target=$HOME dircolors
 stow --target=$HOME config
 stow --target=$HOME bash
 stow --target=$HOME inputrc
+stow --target=$HOME gdb
 
 # Install usr_local_bin folder to /usr/local/bin
 sudo cp usr_local_bin/* /usr/local/bin
@@ -66,9 +67,9 @@ gsettings set org.gnome.desktop.background show-desktop-icons false
 
 
 # Install latest i3 from https://i3wm.org/docs/repositories.html
-/usr/lib/apt/apt-helper download-file https://debian.sur5r.net/i3/pool/main/s/sur5r-keyring/sur5r-keyring_2019.02.01_all.deb keyring.deb SHA256:176af52de1a976f103f9809920d80d02411ac5e763f695327de9fa6aff23f416
+/usr/lib/apt/apt-helper download-file https://debian.sur4r.net/i3/pool/main/s/sur5r-keyring/sur5r-keyring_2021.02.02_all.deb keyring.deb SHA256:cccfb1dd7d6b1b6a137bb96ea5b5eef18a0a4a6df1d6c0c37832025d2edaa710
 sudo dpkg -i ./keyring.deb
-echo "deb http://debian.sur5r.net/i3/ $(grep '^DISTRIB_CODENAME=' /etc/lsb-release | cut -f2 -d=) universe" | sudo tee /etc/apt/sources.list.d/sur5r-i3.list
+echo "deb http://debian.sur4r.net/i3/ $(grep '^DISTRIB_CODENAME=' /etc/lsb-release | cut -f2 -d=) universe" | sudo tee /etc/apt/sources.list.d/sur5r-i3.list
 sudo apt update
 sudo apt install i3
 
@@ -110,5 +111,7 @@ cmake --build .
 cmake --build . --target install
 popd
 popd
+
+# Install delta https://github.com/dandavison/delta#installation
 
 popd
