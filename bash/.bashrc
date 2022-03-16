@@ -43,3 +43,4 @@ eval `dircolors ~/.dircolors/dircolors.256dark`
 
 # Automate ssh-agent startup
 [ -z "$SSH_AUTH_SOCK"  ] && eval "$(ssh-agent -s)"
+. "$HOME/.cargo/env"
