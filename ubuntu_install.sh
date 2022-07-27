@@ -1,7 +1,7 @@
 set -e
 
-# Specify if using a GUI (as opposed to running in a docker or terminal-only environment)
-have_gui=
+# Specify if not using a GUI (as opposed to running in a docker or terminal-only environment)
+no_gui="$NO_GUI"
 
 # Install neovim source list
 sudo add-apt-repository ppa:neovim-ppa/stable
@@ -10,7 +10,11 @@ sudo add-apt-repository ppa:neovim-ppa/stable
 git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
 ~/.fzf/install
 
-if [ "$have_gui" -ne ""]; then
+# Install libtree
+sudo wget -O /usr/local/bin/libtree https://github.com/haampie/libtree/releases/download/v3.1.1/libtree_x86_64
+sudo chmod +x /usr/local/bin/libtree
+
+if [ -z "$no_gui" ]; then
 # Install software with GUI
 	# Install sublime-text source list
 	wget -qO - https://download.sublimetext.com/sublimehq-pub.gpg | sudo apt-key add -
@@ -69,7 +73,7 @@ curl -LO https://github.com/BurntSushi/ripgrep/releases/download/11.0.2/ripgrep_
 sudo dpkg -i ripgrep_11.0.2_amd64.deb
 
 sudo apt-get update
-sudo apt-get install git vim synergy stow neovim xclip tig xbacklight htop
+sudo apt-get install git vim stow neovim xclip tig xbacklight htop
 
 # C++-specific installs (required for cquery)
 sudo apt-get install cmake
@@ -101,7 +105,7 @@ mkdir -p ~/src
 pushd ~/src
 
 # Install DejaVu Sans Mono Nerd Font Complete:
-wget -O DejaVu_Sans_Mono.ttf "https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/DejaVuSansMono/Regular/complete/DejaVu%20Sans%20Mono%20Nerd%20Font%20Complete.ttf" && sudo gnome-font-viewer DejaVu_Sans_Mono.ttf && rm DejaVu_Sans_Mono.ttf
+wget -O DejaVu_Sans_Mono.ttf "https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/DejaVuSansMono/Regular/complete/DejaVu%20Sans%20Mono%20Nerd%20Font%20Complete.ttf" && [ -z $no_gui ] && sudo gnome-font-viewer DejaVu_Sans_Mono.ttf && rm DejaVu_Sans_Mono.ttf
 
 # Install cquery (C/C++ language server support) from https://github.com/cquery-project/cquery/wiki/Building-cquery
 # First install clang dependency
