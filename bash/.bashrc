@@ -11,7 +11,8 @@ export BASH_IT=$HOME/.bash_it
 export BASH_IT_THEME='clean'
 
 # Customize to your needs...
-export PATH=$PATH:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:~/bin
+export
+PATH=$PATH:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:~/bin:~/src/python-3.6.9/bin:$HOME/.toolbox/bin
 
 # Set up TERM for good vim awesomeness
 export TERM=xterm-256color
@@ -44,3 +45,6 @@ eval `dircolors ~/.dircolors/dircolors.256dark`
 # Automate ssh-agent startup
 [ -z "$SSH_AUTH_SOCK"  ] && eval "$(ssh-agent -s)"
 . "$HOME/.cargo/env"
+
+# Kitty
+alias icat="kitty +kitten icat"
