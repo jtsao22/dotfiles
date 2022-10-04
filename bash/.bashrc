@@ -11,8 +11,7 @@ export BASH_IT=$HOME/.bash_it
 export BASH_IT_THEME='clean'
 
 # Customize to your needs...
-export
-PATH=$PATH:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:~/bin:~/src/python-3.6.9/bin:$HOME/.toolbox/bin
+export PATH=$PATH:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:~/bin:~/src/python-3.6.9/bin:$HOME/.toolbox/bin
 
 # Set up TERM for good vim awesomeness
 export TERM=xterm-256color
@@ -29,7 +28,7 @@ source $BASH_IT/bash_it.sh
 # If there's a bash session, source it
 if [ -f ~/.bash_session ]
 then
-    . ~/.bash_session
+   . ~/.bash_session
 fi
 
 # Autocomplete in sudo mode
