@@ -99,6 +99,10 @@ stow --target=$HOME gdb
 # Install usr_local_bin folder to /usr/local/bin
 sudo cp usr_local_bin/* /usr/local/bin
 
+# Install pulseaudio config
+sudo mv /etc/pulse/default.pa /etc/pulse/default.pa.backup
+sudo cp etc/pulse/default.pa /etc/pulse/default.pa
+
 fonts/install.sh
 
 mkdir -p ~/src
