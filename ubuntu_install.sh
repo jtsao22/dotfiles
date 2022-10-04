@@ -46,6 +46,11 @@ if [ -z "$no_gui" ]; then
 	sudo apt update
 	sudo apt install i3
 
+    # If not i3 above, regolith
+
+    # For i3bar, use i3xrocks-battery
+    sudo apt install i3xrocks-battery
+
 	# Install solarized theme for konsole
 	if [ -d ~/.kde4 ]; then
 		KONSOLE_COLOR_SCHEME_PATH=~/.kde4/share/apps/konsole/
