@@ -713,8 +713,8 @@ bindsym $mod+Shift+w [class="obsidian" title="Amazon_Lab126"] focus
 bindsym $mod+t [class="Todoist"] focus
 
 # Assignments of apps to workspaces
-assign [class="slack"] -> number 5
-assign [class="firefox"] -> number 6
-assign [class="obsidian"] -> number 9
-assign [class="Todoist"] -> number 10
-assign [class="com.cisco.anyconnect.gui"] -> number 10
+assign [class="Slack"] → number 5
+assign [class="firefox"] → number 6
+assign [class="obsidian"] → number 9
+assign [class="Todoist"] → number 10
+assign [class="com.cisco.anyconnect.gui"] → number 10
