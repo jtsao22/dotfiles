@@ -25,7 +25,7 @@ if [ -z "$no_gui" ]; then
 	sudo add-apt-repository ppa:jasonpleau/rofi
 
 	sudo apt-get update
-	sudo apt-get install meld konsole synergy feh sublime-text blueman caffeine pavucontrol gsimplecal zeal rofi
+	sudo apt-get install meld konsole synergy feh sublime-text blueman caffeine pavucontrol gsimplecal zeal rofi flameshot
 
 	# Disable nautilus from starting a window containing the desktop icons:
 	gsettings set org.gnome.desktop.background show-desktop-icons false
