@@ -697,6 +697,9 @@ bindsym $mod+Shift+c kill
 # Launch unipicker for picking unicode characters like €
 bindsym $mod+Ctrl+u exec --no-startup-id "/usr/local/bin/unipicker"
 
+# Launch Book and relevant Obsidian note in one keystroke
+bindsym $mod+Shift+a exec --no-startup-id "/usr/bin/com.github.johnfactotum.Foliate"; [class="Com.github.johnfactotum.Foliate" title="Network Effect"] focus; exec --no-startup-id "/usr/bin/xdg-open 'obsidian://open?vault=Brain&file=Books%2FNetwork%20Effect%20By%20Martha%20Wells'"; [class="obsidian" title="Brain"] focus; exec --no-startup-id "/usr/bin/gnome-clocks"
+
 # Go to workspace with urgent window
 bindsym $mod+s layout stacking
 bindsym $mod+w layout tabbed
@@ -716,8 +719,24 @@ bindsym $mod+Shift+w [class="obsidian" title="Amazon_Lab126"] focus
 bindsym $mod+t [class="Todoist"] focus
 
 # Assignments of apps to workspaces
+assign [class="Com.github.johnfactotum.Foliate"] → number 1
 assign [class="Slack"] → number 5
 assign [class="firefox"] → number 6
 assign [class="obsidian"] → number 9
 assign [class="Todoist"] → number 10
 assign [class="com.cisco.anyconnect.gui"] → number 10
+
+# Show borders for these apps since they do not show up by default
+# for_window [all] border pixel 1 # Add in future i3 release
+for_window [class="obsidian"] border pixel 1
+for_window [class="firefox"] border pixel 1
+for_window [class="slack"] border pixel 1
+for_window [class="Spotify"] border pixel 1
+for_window [class="Gnome-calendar"] border pixel 1
+for_window [class="gnome-*"] border pixel 1
+for_window [class="Com.github.johnfactotum.Foliate"] border pixel 1
+
+# Enable VolumeUp/VolumeDown/Mute keys
+bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +3%; exec pactl set-sink-mute @DEFAULT_SINK@ 0
+bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -3%; exec pactl set-sink-mute @DEFAULT_SINK@ 0
+bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle
