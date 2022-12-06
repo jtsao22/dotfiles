@@ -10,6 +10,11 @@ sudo add-apt-repository ppa:neovim-ppa/stable
 git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
 ~/.fzf/install
 
+# Install unipicker
+cd $(mktemp -d)
+git clone https://github.com/jeremija/unipicker unipicker
+cd unipicker && sudo make install
+
 # Install libtree
 sudo wget -O /usr/local/bin/libtree https://github.com/haampie/libtree/releases/download/v3.1.1/libtree_x86_64
 sudo chmod +x /usr/local/bin/libtree

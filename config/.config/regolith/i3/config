@@ -694,6 +694,9 @@ workspace "$ws10" output eDP-1
 bindsym $mod+Ctrl+period exec --no-startup-id "~/.i3/i3scripts/i3-rename-workspace"
 bindsym $mod+Shift+c kill
 
+# Launch unipicker for picking unicode characters like €
+bindsym $mod+Ctrl+u exec --no-startup-id "/usr/local/bin/unipicker"
+
 # Go to workspace with urgent window
 bindsym $mod+s layout stacking
 bindsym $mod+w layout tabbed
