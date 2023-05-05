@@ -10,14 +10,19 @@
     set scrolloff=2                 " Show two lines above/below cursor
     set autowrite                   " Write buffer when switching (e.g. :make)
     set ruler                       " Show line,column numbers
-    set hlsearch                    " Highlight search terms
+    "set hlsearch                    " Highlight search terms
+    "set incsearch                   " Search while you type
+    "hi Search ctermbg=red
+    "hi Search ctermfg=white
+    hi Search guibg=peru guifg=wheat
+    hi Search cterm=NONE ctermfg=grey ctermbg=blue
     set laststatus=2                " Yeah status line!
     filetype indent on              " Indent properly
     syntax on                       " Turn on syntax coloring for color terminals
     set viminfo='100,f1             " Save marks for the last 100 files
     set number                      " Show line numbers
+    set relativenumber              " Set relative line numbers
     " set showmatch                   " Cause cursor to briefly jump to a brace/parentheses/bracket's match
-    set incsearch                   " Search while you type
     set ignorecase                  " For making searching case insensitive
     set smartcase                   " For making searching with capitalized letters case sensitive
     set autoindent                  " autoindent when possible
@@ -68,12 +73,11 @@
     autocmd FileType gitcommit setlocal textwidth=80
 
 " For programming languages using a semi colon at the end of statement.
-    autocmd FileType c,cpp,css,java,javascript,perl,php
-        \ noremap ; :s/\([^;]\)$/\1;/<cr>:nohls<cr>
+    "autocmd FileType c,cpp,css,java,javascript,perl,php,rust
+        "\ noremap ; :s/\([^;]\)$/\1;/<cr>:nohls<cr>
 
 " For json files, don't conceal (quotes etc)
-    autocmd FileType json
-        \ set conceallevel=0
+    set conceallevel=0
 
 " Use <C-L> to clear the highlighting of :set hlsearch.
     if maparg('<C-L>', 'n') ==# ''
@@ -92,10 +96,11 @@
 " Source vimrc file after saving it
     if has("autocmd")
         autocmd! bufwritepost .vimrc source $MYVIMRC
+        autocmd! bufwritepost init.vim source $MYVIMRC
     endif
 
 " Type \v for easy access to vimrc editting
-    nmap <leader>v :tabedit $MYVIMRC<CR>
+    nmap <leader>v :vsp $MYVIMRC<CR>
 
 " Plugins
 
@@ -111,37 +116,56 @@
 
         Plug 'derekwyatt/vim-fswitch'
         Plug 'luochen1990/rainbow'
-        Plug 'tpope/vim-fugitive'
+        Plug 'andymass/vim-matchup'
         Plug 'tpope/vim-surround'
+        " Automatic Vim session saving
+        Plug 'tpope/vim-obsession'
+
+        "Plug 'jiangmiao/auto-pairs'
         Plug 'scrooloose/nerdcommenter'
-        Plug 'scrooloose/nerdtree'
         Plug 'godlygeek/tabular'
         Plug 'bronson/vim-trailing-whitespace'
         Plug 'SirVer/ultisnips'
         Plug 'honza/vim-snippets'
         Plug 'vim-airline/vim-airline'
         Plug 'vim-airline/vim-airline-themes'
-        Plug 'hynek/vim-python-pep8-indent'
         Plug 'airblade/vim-gitgutter'
-        Plug 'haya14busa/incsearch.vim'
-        Plug 'haya14busa/incsearch-fuzzy.vim'
-        Plug 'haya14busa/incsearch-easymotion.vim'
+        "Plug 'haya14busa/incsearch-fuzzy.vim'
+        "Plug 'haya14busa/incsearch-easymotion.vim'
+
+        " For running UNIX shell commands like :Move and :SudoWrite
+        Plug 'tpope/vim-eunuch'
+
+        " Automatic highlighting other uses of word under cursor using LSP, Tree-sitter, or regex
+        Plug 'RRethy/vim-illuminate'
         Plug 'easymotion/vim-easymotion'
-        Plug 'Yggdroot/indentLine'
+
+        " vim plugins to use other programs
         Plug 'jremmen/vim-ripgrep'
+        Plug 'tpope/vim-fugitive'
         Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
         Plug 'junegunn/fzf.vim'
-        Plug 'airblade/vim-rooter'
-        Plug 'machakann/vim-highlightedyank'
         Plug 'KabbAmine/zeavim.vim'
         Plug 'aklt/plantuml-syntax'
+
+        "Plug 'airblade/vim-rooter'
+        Plug 'machakann/vim-highlightedyank'
         Plug 'rhysd/vim-clang-format'
-        Plug 'nvim-lua/plenary.nvim'
-        Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.0' }
+
+        " Themes
+        " Plug 'lifepillar/vim-solarized8'
+        " Plug 'dracula/vim', { 'as': 'dracula' }
+        Plug 'joshdick/onedark.vim'
 
         " Rust-specific plugins
         Plug 'rust-lang/rust.vim'
         "Plug 'simrat39/rust-tools.nvim'
+
+        " Neovim specific
+        Plug 'nvim-lua/plenary.nvim'
+        Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.0' }
+        Plug 'fannheyward/telescope-coc.nvim'
+        Plug 'lukas-reineke/indent-blankline.nvim'
 
         "" Syntax highlighters
         Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
@@ -151,15 +175,13 @@
         Plug 'dense-analysis/ale'
         " Plug 'scrooloose/syntastic'
 
-        "Plug 'autozimu/LanguageClient-neovim'
-        " Themes
-        " Plug 'lifepillar/vim-solarized8'
-        " Plug 'dracula/vim', { 'as': 'dracula' }
-        Plug 'joshdick/onedark.vim'
-
         " Language clients
         Plug 'neoclide/coc.nvim', {'branch': 'release'}
-        "Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
+        Plug 'nvim-tree/nvim-tree.lua'
+        "Plug 'autozimu/LanguageClient-neovim'
+
+        " File tree plugins. Used nerdtree for a long time, but replaced with coc-explorer
+        " Plug 'scrooloose/nerdtree'
 
     call plug#end()
 
@@ -181,20 +203,13 @@
 
 " NERDTree
     " Map toggle to leader-e
-    map <leader>e :NERDTreeToggle<CR>
+    "map <leader>e :NERDTreeToggle<CR>
+    nmap <space>e <Cmd>CocCommand explorer<CR>
     "autocmd VimEnter * NERDTree                             " Open NERDTree automatically;
     "autocmd VimEnter * wincmd w                             " Place cursor in the correct window;
     "autocmd VimEnter * if !argc() | NERDTree | endif        " Open NERDTree if no files specified;
     " Close vim if the only window left open is NERDTree
-    autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
-
-" YouCompleteMe
-    " Let clangd fully control code completion
-    "let g:ycm_clangd_uses_ycmd_caching = 0
-    " Use installed clangd, not YCM-bundled clangd which doesn't get updates.
-    let g:ycm_clangd_binary_path = exepath("clangd-6.0")
-    " Setup YouCompleteMe compilation database with bear
-    nnoremap <leader>d :YcmCompleter GoTo<CR>
+    "autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 
     " Cquery
         let g:LanguageClient_serverCommands = {
@@ -220,11 +235,6 @@
     set rtp+=~/.fzf
     nnoremap <C-p> :ProjectFiles<cr>
     nnoremap <leader>a :Files $ASRC<cr>
-    nnoremap <leader>c :Files $CSRC<cr>
-    nnoremap <leader>r :Files $RSRC<cr>
-    nnoremap <leader>p :Files $PSRC<cr>
-    nnoremap <leader>s :Files $SSRC<cr>
-    nnoremap <leader>n :Files $VSRC<cr>
 
 " rainbow
     let g:rainbow_active = 1
@@ -263,11 +273,12 @@
     nmap <Leader><Leader>w <Plug>(easymotion-overwin-w)
 
     " Gif config
-    map <Leader><Leader>l <Plug>(easymotion-lineforward)
+    map <Leader>l <Plug>(easymotion-lineforward)
     map <Leader><Leader>j <Plug>(easymotion-j)
     map <Leader><Leader>k <Plug>(easymotion-k)
-    map <Leader><Leader>h <Plug>(easymotion-linebackward)
+    map <Leader>h <Plug>(easymotion-linebackward)
 
+    let g:EasyMotion_smartcase = 1
     let g:EasyMotion_startofline = 0 " keep cursor column when JK motion
 
 " Telescope
@@ -277,6 +288,7 @@
     nnoremap <leader>ft <cmd>Telescope grep_string<cr>
     nnoremap <leader>fb <cmd>Telescope buffers<cr>
     nnoremap <leader>fh <cmd>Telescope help_tags<cr>
+    nnoremap <leader>fd <cmd>Telescope coc workspace_symbols<cr>
 
 " incsearch-fuzzy
 map z/ <Plug>(incsearch-fuzzy-/)
@@ -290,34 +302,17 @@ map z/ <Plug>(incsearch-fuzzy-/)
     "colorscheme dracula
      colorscheme onedark
 
-"auto close {
-function! s:CloseBracket()
-    let line = getline('.')
-    if line =~# '^\s*\(struct\|class\|enum\) '
-        return "{\<Enter>};\<Esc>O"
-    elseif searchpair('(', '', ')', 'bmn', '', line('.'))
-        " Probably inside a function call. Close it off.
-        return "{\<Enter>});\<Esc>O"
-    else
-        return "{\<Enter>}\<Esc>O"
-    endif
-endfunction
-inoremap <expr> {<Enter> <SID>CloseBracket()
-
 " Remap Caps lock to Esc
+if has('unix')
     au VimEnter * silent! !xmodmap -e 'clear Lock' -e 'keycode 0x42 = Escape'
     au VimLeave * silent! !xmodmap -e 'clear Lock' -e 'keycode 0x42 = Caps_Lock'
+endif
 
 " Ale - disable LSP since it's taken care of by coc, but use ALE's diagnostics
-" let g:ale_disable_lsp = 1
+    let g:ale_disable_lsp = 1
 
 " coc
 " GoTo code navigation.
-    "nmap <silent> gd <Plug>(coc-definition)
-    "nmap <silent> gy <Plug>(coc-type-definition)
-    "nmap <silent> gi <Plug>(coc-implementation)
-    "nmap <silent> gr <Plug>(coc-references)
-
     " May need for vim (not neovim) since coc.nvim calculate byte offset by count
     " utf-8 byte sequence.
     set encoding=utf-8
@@ -363,6 +358,7 @@ inoremap <expr> {<Enter> <SID>CloseBracket()
 
     " Use `[g` and `]g` to navigate diagnostics
     " Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
+    let g:coc_global_extensions = ['coc-explorer', 'coc-highlight', 'coc-rust-analyzer', 'coc-clangd', 'coc-json', 'coc-pairs']
     nmap <silent> [g <Plug>(coc-diagnostic-prev)
     nmap <silent> ]g <Plug>(coc-diagnostic-next)
 
@@ -371,6 +367,7 @@ inoremap <expr> {<Enter> <SID>CloseBracket()
     nmap <silent> gy <Plug>(coc-type-definition)
     nmap <silent> gi <Plug>(coc-implementation)
     nmap <silent> gr <Plug>(coc-references)
+    nnoremap <silent> gv :vsplit<CR><Plug>(coc-definition)
 
     " Use K to show documentation in preview window.
     nnoremap <silent> K :call ShowDocumentation()<CR>
@@ -381,6 +378,11 @@ inoremap <expr> {<Enter> <SID>CloseBracket()
       else
         call feedkeys('K', 'in')
       endif
+    endfunction
+
+    nnoremap <silent> <leader>d :call ShowDocWebsite()<CR>
+    function! ShowDocWebsite()
+        call CocActionAsync('runCommand', 'rust-analyzer.openDocs')
     endfunction
 
     " Highlight the symbol and its references when holding the cursor.
@@ -464,8 +466,9 @@ inoremap <expr> {<Enter> <SID>CloseBracket()
     " Mappings for CoCList
     " Show all diagnostics.
     nnoremap <silent><nowait> <space>a  :<C-u>CocList diagnostics<cr>
+    nnoremap <silent><nowait> <space>n  :call CocAction('diagnosticNext')<CR>
     " Manage extensions.
-    nnoremap <silent><nowait> <space>e  :<C-u>CocList extensions<cr>
+    "nnoremap <silent><nowait> <space>e  :<C-u>CocList extensions<cr>
     " Show commands.
     nnoremap <silent><nowait> <space>c  :<C-u>CocList commands<cr>
     " Find symbol of current document.
@@ -479,6 +482,56 @@ inoremap <expr> {<Enter> <SID>CloseBracket()
     " Resume latest coc list.
     nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
 
+" coc explorer
+    function! s:explorer_cur_dir()
+      let node_info = CocAction('runCommand', 'explorer.getNodeInfo', 0)
+      return fnamemodify(node_info['fullpath'], ':h')
+    endfunction
+
+    function! s:exec_cur_dir(cmd)
+      let dir = s:explorer_cur_dir()
+      execute 'cd ' . dir
+      execute a:cmd
+    endfunction
+
+    function! s:init_explorer()
+      set winblend=10
+
+      " Integration with other plugins
+
+      " vim-floaterm
+      nmap <buffer> <Leader>ft <Cmd>call <SID>exec_cur_dir('FloatermNew --wintype=floating')<CR>
+    endfunction
+
+    function! s:enter_explorer()
+      if &filetype == 'coc-explorer'
+        " statusline
+        setl statusline=coc-explorer
+      endif
+    endfunction
+
+    augroup CocExplorerCustom
+      autocmd!
+      autocmd BufEnter * call <SID>enter_explorer()
+      autocmd FileType coc-explorer call <SID>init_explorer()
+  augroup END
+
+  function! s:DisableFileExplorer()
+      au! FileExplorer
+  endfunction
+
+  function! s:OpenDirHere(dir)
+      if isdirectory(a:dir)
+          exec "silent CocCommand explorer --current-buffer" . a:dir
+      endif
+  endfunction
+
+  " Taken from vim-easytree plugin, and changed to use coc-explorer
+  augroup CocExplorerDefault
+      autocmd VimEnter * call <SID>DisableFileExplorer()
+      autocmd BufEnter * call <SID>OpenDirHere(expand('<amatch>'))
+  augroup end
+
 " Lua
 lua << EOF
 require'nvim-treesitter.configs'.setup {
@@ -491,9 +544,6 @@ require'nvim-treesitter.configs'.setup {
   -- Automatically install missing parsers when entering buffer
   -- Recommendation: set to false if you don't have `tree-sitter` CLI installed locally
   auto_install = true,
-
-  -- List of parsers to ignore installing (for "all")
-  ignore_install = { "javascript" },
 
   ---- If you need to change the installation directory of the parsers (see -> Advanced Setup)
   -- parser_install_dir = "/some/path/to/store/parsers", -- Remember to run vim.opt.runtimepath:append("/some/path/to/store/parsers")!
@@ -522,5 +572,20 @@ require'nvim-treesitter.configs'.setup {
     -- Instead of true it can also be a list of languages
     additional_vim_regex_highlighting = false,
   },
+  matchup = {
+    enable = true,              -- mandatory, false will disable the whole extension
+    include_match_words = true,
+  },
 }
+require("telescope").setup({
+  extensions = {
+    coc = {
+        theme = 'ivy',
+        prefer_locations = true, -- always use Telescope locations to preview definitions/declarations/implementations etc
+    }
+  },
+})
+require('telescope').load_extension('coc')
 EOF
+
+let g:tex_conceal=''
