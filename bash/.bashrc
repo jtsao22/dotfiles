@@ -1,5 +1,3 @@
-#!/usr/bin/env bash
-
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
 
@@ -17,7 +15,7 @@ export PATH=$PATH:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:~
 export TERM=xterm-256color
 
 # Use vim to read man pages
-# export MANPAGER="/bin/sh -c \"col -b | vim -c 'set ft=man ts=8 nomod nolist nonu noma' -\""
+export MANPAGER="/bin/sh -c \"col -b | vim -c 'set ft=man ts=8 nomod nolist nonu noma' -\""
 
 #set editing-mode vi
 set -o vi
@@ -38,12 +36,18 @@ complete -cf sudo
 shopt -s histappend
 PROMPT_COMMAND="history -a;$PROMPT_COMMAND"
 
-# Activate LS_COLORS in config
-eval `dircolors ~/.dircolors/dircolors.256dark`
-
 # Automate ssh-agent startup
 [ -z "$SSH_AUTH_SOCK"  ] && eval "$(ssh-agent -s)"
 . "$HOME/.cargo/env"
 
 # Kitty
 alias icat="kitty +kitten icat"
+
+# Remove deprecation message for terminal
+export BASH_SILENCE_DEPRECATION_WARNING=1
+
+# Activations if available
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
+[ -n $(which zoxide) ] && eval "$(zoxide init bash)"
+# Activate LS_COLORS in config
+[ -n $(which dircolors) ] && eval `dircolors ~/.dircolors/dircolors.256dark`
