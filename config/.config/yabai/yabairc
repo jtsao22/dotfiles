@@ -1,0 +1,71 @@
+#!/usr/bin/env sh
+#YABAI STUFF
+
+# My custom space names for my 3 monitor setup. These names are used in some of my scripts.
+yabai -m space 1 --label one
+yabai -m space 2 --label two
+yabai -m space 3 --label three
+yabai -m space 4 --label four
+yabai -m space 5 --label five
+yabai -m space 6 --label six
+yabai -m space 9 --label nine
+
+# float system preferences. Most of these just diable Yabai form resizing them.
+yabai -m rule --add app="^System Preferences$" sticky=on layer=above manage=off
+yabai -m rule --add app="^Cisco AnyConnect Secure Mobility Client$" sticky=on layer=above manage=off
+yabai -m rule --add app="^Karabiner-Elements$" sticky=on layer=above manage=off
+yabai -m rule --add app="^Karabiner-EventViewer$" sticky=on layer=above manage=off
+yabai -m rule --add app="^Alfred Preferences$" sticky=on layer=above manage=off
+yabai -m rule --add app="^Disk Utility$" sticky=on layer=above manage=off
+yabai -m rule --add app="^System Information$" sticky=on layer=above manage=off
+yabai -m rule --add app="^Activity Monitor$" sticky=on layer=above manage=off
+# yabai -m rule --add app="^Spotify$" manage=off
+
+## Some random global settings
+# New window spawns to the right if vertical split, or bottom if horizontal split
+yabai -m config window_placement second_child
+yabai -m config window_topmost off
+yabai -m config window_opacity off
+yabai -m config window_opacity_duration 0.00
+yabai -m config active_window_opacity 1.0
+
+## WTIH SIP DISABLED (Limelight build into Yabai, enable it here)
+yabai -m config window_border on
+yabai -m config window_border_width 3
+yabai -m config active_window_border_color 0xFF40FF00
+yabai -m config normal_window_border_color 0x00FFFFFF
+yabai -m config insert_feedback_color        0xffd75f5f
+
+## some other settings
+yabai -m config auto_balance on
+yabai -m config split_ratio 0.50
+# # set mouse interaction modifier key (default: fn)
+yabai -m config mouse_modifier ctrl
+# set modifier + right-click drag to resize window (default: resize)
+yabai -m config mouse_action2 resize
+# set modifier + left-click drag to resize window (default: move)
+yabai -m config mouse_action1 move
+
+## Change how yabai looks
+yabai -m config layout bsp
+yabai -m config top_padding 2
+yabai -m config bottom_padding 2
+yabai -m config left_padding 1
+yabai -m config right_padding 1
+yabai -m config window_gap 2
+
+# Restart yabai when resuming laptop
+# for this to work you must configure sudo such that
+# it will be able to run the command without password
+yabai -m signal --add event=dock_did_restart action="sudo yabai --load-sa"
+sudo yabai --load-sa
+
+# Start SKHD in the background. Work around issues:
+# https://github.com/koekeishiya/skhd/issues/103
+# https://github.com/koekeishiya/skhd/issues/139
+skhd &
+
+echo "yabai configuration loaded.."
+
+
+#END
