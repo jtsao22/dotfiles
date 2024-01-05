@@ -140,6 +140,10 @@
         Plug 'RRethy/vim-illuminate'
         Plug 'easymotion/vim-easymotion'
 
+        "Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
+        Plug 'Yggdroot/indentLine'
+
+        " Use coc instead of Plug 'autozimu/LanguageClient-neovim'
         " vim plugins to use other programs
         Plug 'jremmen/vim-ripgrep'
         Plug 'tpope/vim-fugitive'
@@ -154,8 +158,9 @@
 
         " Themes
         " Plug 'lifepillar/vim-solarized8'
-        " Plug 'dracula/vim', { 'as': 'dracula' }
         Plug 'joshdick/onedark.vim'
+        Plug 'dracula/vim', { 'as': 'dracula' }
+        Plug 'catppuccin/nvim', { 'as': 'catppuccin' }
 
         " Rust-specific plugins
         Plug 'rust-lang/rust.vim'
@@ -177,11 +182,10 @@
 
         " Language clients
         Plug 'neoclide/coc.nvim', {'branch': 'release'}
-        Plug 'nvim-tree/nvim-tree.lua'
-        "Plug 'autozimu/LanguageClient-neovim'
 
         " File tree plugins. Used nerdtree for a long time, but replaced with coc-explorer
         " Plug 'scrooloose/nerdtree'
+        Plug 'nvim-tree/nvim-tree.lua'
 
     call plug#end()
 
@@ -433,6 +437,11 @@ endif
     omap ic <Plug>(coc-classobj-i)
     xmap ac <Plug>(coc-classobj-a)
     omap ac <Plug>(coc-classobj-a)
+
+" Change the default colorscheme (must be done after Vundle because of solarized plugin)
+    "colorscheme solarized8
+    "colorscheme dracula
+    colorscheme catppuccin-mocha " catppuccin-latte, catppuccin-frappe, catppuccin-macchiato, catppuccin-mocha
 
     " Remap <C-f> and <C-b> for scroll float windows/popups.
     if has('nvim-0.4.0') || has('patch-8.2.0750')
