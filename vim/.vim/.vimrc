@@ -10,10 +10,10 @@
     set scrolloff=2                 " Show two lines above/below cursor
     set autowrite                   " Write buffer when switching (e.g. :make)
     set ruler                       " Show line,column numbers
-    "set hlsearch                    " Highlight search terms
-    "set incsearch                   " Search while you type
-    "hi Search ctermbg=red
-    "hi Search ctermfg=white
+    set hlsearch                    " Highlight search terms
+    set incsearch                   " Search while you type
+    hi Search ctermbg=red
+    hi Search ctermfg=white
     hi Search guibg=peru guifg=wheat
     hi Search cterm=NONE ctermfg=grey ctermbg=blue
     set laststatus=2                " Yeah status line!
@@ -38,7 +38,9 @@
     set splitright                  " Split to the right
     set undodir=~/.vim/undodir       " Setup undo across sessions
     set undofile                    " Setup undo across sessions
-    set termguicolors               " Use true (24-bit) colors
+    if exists('+termguicolors')
+        set termguicolors               " Use true (24-bit) colors
+    endif
 
     highlight ColorColumn ctermbg=lightblue guibg=lightblue
 
@@ -130,6 +132,7 @@
         Plug 'vim-airline/vim-airline'
         Plug 'vim-airline/vim-airline-themes'
         Plug 'airblade/vim-gitgutter'
+        Plug 'haya14busa/vim-poweryank'
         "Plug 'haya14busa/incsearch-fuzzy.vim'
         "Plug 'haya14busa/incsearch-easymotion.vim'
 
@@ -165,6 +168,17 @@
         " Rust-specific plugins
         Plug 'rust-lang/rust.vim'
         "Plug 'simrat39/rust-tools.nvim'
+
+        " Typescript specific
+        Plug 'pangloss/vim-javascript'    " JavaScript support
+        Plug 'leafgarland/typescript-vim' " TypeScript syntax
+        Plug 'maxmellon/vim-jsx-pretty'   " JS and JSX syntax
+        " post install (yarn install | npm install) then load plugin only for editing supported files
+        Plug 'prettier/vim-prettier', {
+                    \ 'do': 'yarn install --frozen-lockfile --production',
+                    \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'svelte', 'yaml', 'html'] }
+        let g:prettier#autoformat = 1
+        au FileType jsx,tsx,css,scss let b:prettier_exec_cmd = "prettier-stylelint"
 
         " Neovim specific
         Plug 'nvim-lua/plenary.nvim'
@@ -259,8 +273,9 @@
 
 " vim-clang-format
     let g:clang_format#detect_style_file = 1   " Use .clang-format file
-    autocmd FileType c ClangFormatAutoEnable  " auto format C/C++ files on buffer write
-" map to <Leader>cf in C++ code
+
+    autocmd FileType c,cpp ClangFormatAutoEnable  " auto format C/C++ files on buffer write
+    " map to <Leader>cf in C++ code
     autocmd FileType c,cpp,objc nnoremap <buffer><Leader>cf :<C-u>ClangFormat<CR>
     autocmd FileType c,cpp,objc vnoremap <buffer><Leader>cf :ClangFormat<CR>
 
@@ -288,7 +303,7 @@
 " Telescope
     " Find files using Telescope command-line sugar.
     nnoremap <leader>ff <cmd>Telescope find_files<cr>
-    nnoremap <leader>fg <cmd>Telescope live_grep<cr>
+    nnoremap <leader>g <cmd>Telescope live_grep<cr>
     nnoremap <leader>ft <cmd>Telescope grep_string<cr>
     nnoremap <leader>fb <cmd>Telescope buffers<cr>
     nnoremap <leader>fh <cmd>Telescope help_tags<cr>
@@ -303,8 +318,12 @@ map z/ <Plug>(incsearch-fuzzy-/)
 
 " Change the default colorscheme (must be done after Vundle because of solarized plugin)
     "colorscheme solarized8
-    "colorscheme dracula
-     colorscheme onedark
+    "colorscheme catppuccin-mocha " catppuccin-latte, catppuccin-frappe, catppuccin-macchiato, catppuccin-mocha
+
+    colorscheme dracula
+    if &diff
+        colorscheme dracula
+    endif
 
 " Remap Caps lock to Esc
 if has('unix')
@@ -331,6 +350,9 @@ endif
     " Always show the signcolumn, otherwise it would shift the text each time
     " diagnostics appear/become resolved.
     set signcolumn=yes
+
+    " Poweryank
+    map <leader>y <Plug>(operator-poweryank-osc52)
 
     " Use tab for trigger completion with characters ahead and navigate.
     " NOTE: There's always complete item selected by default, you may want to enable
