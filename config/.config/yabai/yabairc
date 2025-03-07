@@ -8,9 +8,11 @@ yabai -m space 3 --label three
 yabai -m space 4 --label four
 yabai -m space 5 --label five
 yabai -m space 6 --label six
+yabai -m space 7 --label seven
+yabai -m space 8 --label eight
 yabai -m space 9 --label nine
 
-# float system preferences. Most of these just diable Yabai form resizing them.
+# float system preferences. Most of these just disable Yabai form resizing them.
 yabai -m rule --add app="^System Preferences$" sticky=on layer=above manage=off
 yabai -m rule --add app="^Cisco AnyConnect Secure Mobility Client$" sticky=on layer=above manage=off
 yabai -m rule --add app="^Karabiner-Elements$" sticky=on layer=above manage=off
@@ -29,12 +31,11 @@ yabai -m config window_opacity off
 yabai -m config window_opacity_duration 0.00
 yabai -m config active_window_opacity 1.0
 
-## WTIH SIP DISABLED (Limelight build into Yabai, enable it here)
 yabai -m config window_border on
 yabai -m config window_border_width 3
 yabai -m config active_window_border_color 0xFF40FF00
 yabai -m config normal_window_border_color 0x00FFFFFF
-yabai -m config insert_feedback_color        0xffd75f5f
+yabai -m config insert_feedback_color 0xffd75f5f
 
 ## some other settings
 yabai -m config auto_balance on
@@ -65,7 +66,9 @@ sudo yabai --load-sa
 # https://github.com/koekeishiya/skhd/issues/139
 skhd &
 
-echo "yabai configuration loaded.."
+# Add green border to active window. Requires border install
+borders active_color=0xff00ff00 inactive_color=0xff494d64 width=5.0 &
 
+echo "yabai configuration loaded.."
 
 #END
