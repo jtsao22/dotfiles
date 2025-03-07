@@ -20,62 +20,62 @@ sudo wget -O /usr/local/bin/libtree https://github.com/haampie/libtree/releases/
 sudo chmod +x /usr/local/bin/libtree
 
 if [ -z "$no_gui" ]; then
-# Install software with GUI
-	# Install sublime-text source list
-	wget -qO - https://download.sublimetext.com/sublimehq-pub.gpg | sudo apt-key add -
-	sudo apt-get install apt-transport-https
-	echo "deb https://download.sublimetext.com/ apt/stable/" | sudo tee /etc/apt/sources.list.d/sublime-text.list
+    # Install software with GUI
+    # Install sublime-text source list
+    wget -qO - https://download.sublimetext.com/sublimehq-pub.gpg | sudo apt-key add -
+    sudo apt-get install apt-transport-https
+    echo "deb https://download.sublimetext.com/ apt/stable/" | sudo tee /etc/apt/sources.list.d/sublime-text.list
 
-	# Install rofi ppa
-	sudo add-apt-repository ppa:jasonpleau/rofi
+    # Install rofi ppa
+    sudo add-apt-repository ppa:jasonpleau/rofi
 
-	sudo apt-get update
-	sudo apt-get install meld konsole synergy feh sublime-text blueman caffeine pavucontrol gsimplecal zeal rofi flameshot
+    sudo apt-get update
+    sudo apt-get install meld konsole synergy feh sublime-text blueman caffeine pavucontrol gsimplecal zeal rofi flameshot
 
-	# Disable nautilus from starting a window containing the desktop icons:
-	gsettings set org.gnome.desktop.background show-desktop-icons false
+    # Disable nautilus from starting a window containing the desktop icons:
+    gsettings set org.gnome.desktop.background show-desktop-icons false
 
-	# Install Faenza gnome icon theme
-	# google-chrome http://gnome-look.org/content/download.php?content=128143&id=1&tan=48958334
-	# vi ~/.config/gtk-3.0/settings.ini :
-	#[Settings]
-	#gtk-theme-name = Faenza
-	#gtk-font-name = Open Sans 8
-	#gtk-fallback-icon-theme = Mint-X
-	#gtk-icon-theme-name = Faenza-Dark
+    # Install Faenza gnome icon theme
+    # google-chrome http://gnome-look.org/content/download.php?content=128143&id=1&tan=48958334
+    # vi ~/.config/gtk-3.0/settings.ini :
+    #[Settings]
+    #gtk-theme-name = Faenza
+    #gtk-font-name = Open Sans 8
+    #gtk-fallback-icon-theme = Mint-X
+    #gtk-icon-theme-name = Faenza-Dark
 
-	# Install latest i3 from https://i3wm.org/docs/repositories.html
+    # Install latest i3 from https://i3wm.org/docs/repositories.html
     /usr/lib/apt/apt-helper download-file https://debian.sur5r.net/i3/pool/main/s/sur5r-keyring/sur5r-keyring_2022.02.17_all.deb keyring.deb SHA256:52053550c4ecb4e97c48900c61b2df4ec50728249d054190e8a0925addb12fc6
-	sudo dpkg -i ./keyring.deb
-	echo "deb http://debian.sur4r.net/i3/ $(grep '^DISTRIB_CODENAME=' /etc/lsb-release | cut -f2 -d=) universe" | sudo tee /etc/apt/sources.list.d/sur5r-i3.list
-	sudo apt update
-	sudo apt install i3
+    sudo dpkg -i ./keyring.deb
+    echo "deb http://debian.sur4r.net/i3/ $(grep '^DISTRIB_CODENAME=' /etc/lsb-release | cut -f2 -d=) universe" | sudo tee /etc/apt/sources.list.d/sur5r-i3.list
+    sudo apt update
+    sudo apt install i3
 
     # If not i3 above, regolith
 
     # For i3bar, use i3xrocks-battery
     sudo apt install i3xrocks-battery
 
-	# Install solarized theme for konsole
-	if [ -d ~/.kde4 ]; then
-		KONSOLE_COLOR_SCHEME_PATH=~/.kde4/share/apps/konsole/
-	elif [ -d ~/.kde ]; then
-		KONSOLE_COLOR_SCHEME_PATH=~/.kde/share/apps/konsole/
-	else
-		KONSOLE_COLOR_SCHEME_PATH=~/.local/share/konsole/
-	fi
+    # Install solarized theme for konsole
+    if [ -d ~/.kde4 ]; then
+        KONSOLE_COLOR_SCHEME_PATH=~/.kde4/share/apps/konsole/
+    elif [ -d ~/.kde ]; then
+        KONSOLE_COLOR_SCHEME_PATH=~/.kde/share/apps/konsole/
+    else
+        KONSOLE_COLOR_SCHEME_PATH=~/.local/share/konsole/
+    fi
 
-	# Must start konsole first time to establish konsole path
-	konsole &
+    # Must start konsole first time to establish konsole path
+    konsole &
 
-	wget -O $KONSOLE_COLOR_SCHEME_PATH/SolarizedLight.colorscheme "https://raw.github.com/phiggins/konsole-colors-solarized/master/Solarized%20Light.colorscheme"
-	wget -O $KONSOLE_COLOR_SCHEME_PATH/SolarizedDark.colorscheme "https://raw.github.com/phiggins/konsole-colors-solarized/master/Solarized%20Dark.colorscheme"
-	wget -O $KONSOLE_COLOR_SCHEME_PATH/Dracula.colorscheme "https://raw.githubusercontent.com/dracula/konsole/master/Dracula.colorscheme"
+    wget -O $KONSOLE_COLOR_SCHEME_PATH/SolarizedLight.colorscheme "https://raw.github.com/phiggins/konsole-colors-solarized/master/Solarized%20Light.colorscheme"
+    wget -O $KONSOLE_COLOR_SCHEME_PATH/SolarizedDark.colorscheme "https://raw.github.com/phiggins/konsole-colors-solarized/master/Solarized%20Dark.colorscheme"
+    wget -O $KONSOLE_COLOR_SCHEME_PATH/Dracula.colorscheme "https://raw.githubusercontent.com/dracula/konsole/master/Dracula.colorscheme"
 
-	# Install bumblebee and its dependencies
-	sudo easy_install pip
-	sudo pip install netifaces
-	git clone https://github.com/tobi-wan-kenobi/bumblebee-status.git
+    # Install bumblebee and its dependencies
+    sudo easy_install pip
+    sudo pip install netifaces
+    git clone https://github.com/tobi-wan-kenobi/bumblebee-status.git
 fi
 
 # Install ripgrep: https://github.com/BurntSushi/ripgrep
@@ -113,7 +113,7 @@ sudo cp usr_local_bin/* /usr/local/bin
 sudo mv /etc/pulse/default.pa /etc/pulse/default.pa.backup
 sudo cp etc/pulse/default.pa /etc/pulse/default.pa
 
-fonts/install.sh
+source common_install.sh
 
 mkdir -p ~/src
 pushd ~/src
