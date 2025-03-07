@@ -1,0 +1,25 @@
+return {
+  "williamboman/mason.nvim",
+  opts = {
+    ensure_installed = {
+        "autopep8",
+        "checkstyle",
+        "clangd",
+        "cmakelang",
+        "cmakelint",
+        "codelldb",
+        "eslint-lsp",
+        "eslint_d",
+        "flake8",
+        "jdtls",
+        "js-debug-adapter",
+        "json-lsp",
+        "lua-language-server",
+        "neocmakelsp",
+        "prettier",
+        "pyright",
+        "shfmt",
+        "stylua",
+    },
+  }
+}
