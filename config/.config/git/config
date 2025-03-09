@@ -1,0 +1,93 @@
+[user]
+    name = Jason Tsao
+
+[core]
+    editor = nvim
+    pager = delta
+    # Creates a filesystem monitor per active git repo for faster git status
+	fsmonitor = true
+    # Automatically add untrack cache feature of the index
+	untrackedCache = true
+
+[diff]
+    tool = delta
+    # https://blog.gitbutler.com/how-git-core-devs-configure-git/
+	colorMoved = plain
+	mnemonicPrefix = true
+	renames = true
+    ; try histogram later. For now delta is used, so diff algorithm doesn't apply
+	; algorithm = histogram
+    ;tool = difftastic
+ 
+[difftool "difftastic"]
+        cmd = difft "$LOCAL" "$REMOTE"
+
+; Override git-mergetool command to use nvim's diffview
+[alias]
+  mergetool = "!nvim -c DiffviewOpen"
+
+[difftool]
+	prompt = false
+
+[merge]
+	tool = nvim
+    # Adds |||| block that shows what the block looked like before either of changes was applied.
+	conflictstyle = zdiff3
+
+[mergetool]
+	keepBackup = false
+
+[mergetool "nvim"]
+	cmd = nvim -d $LOCAL $BASE $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J'
+
+[color]
+	ui = auto
+
+[pull]
+	rebase = true
+
+[delta]
+    plus-color = "#012800"
+    minus-color = "#340001"
+    syntax-theme = Solarized (dark)
+    side-by-side = true
+
+[interactive]
+    diffFilter = delta --color-only
+
+[tig "color"]
+	# A strange looking cursor line
+	cursor		= red	default underline
+	# UI colors
+	title-blur	= white	blue
+	title-focus	= white	blue	bold
+
+# View-specific color
+[tig "color.tree"]
+	date		= cyan	default	bold
+
+[ssh]
+	variant = ssh
+
+[rerere]
+    # Records before and after states of rebase conflicts
+	enabled = true
+    # Automatically re-apply resolutions if it seems them again
+	autoupdate = true
+
+[column]
+    # Show branches in columnar format
+	ui = auto
+
+[branch]
+    # Sort branch by committerdate rather than alpha order since more recent branches are usually
+    # more important.
+	sort = -committerdate
+
+[tag]
+    # Treat dotted version numbers as a series of integer values for sorting purposes
+	sort = version:refname
+
+[init]
+    # Default branch main
+	defaultBranch = main
