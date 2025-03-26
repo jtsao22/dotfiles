@@ -39,6 +39,14 @@ return {
         desc = "Grep in workspace",
       },
       {
+        -- Find word in current file
+        "<leader>fu",
+        function()
+          require("telescope.builtin").live_grep({ search_dirs = { vim.fn.expand("%:p") } })
+        end,
+        desc = "Grep in workspace",
+      },
+      {
         "<leader>fi",
         function()
           require("telescope").extensions.live_grep_args.live_grep_args()
