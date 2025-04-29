@@ -33,6 +33,14 @@ config.default_prog = { "/bin/bash" }
 -- Remove title bar
 config.window_decorations = "RESIZE"
 
+-- Remove window padding on top and bottom.
+config.window_padding = {
+	left = 2,
+	right = 2,
+	top = 0,
+	bottom = 0,
+}
+
 -- Make tab bar at bottom
 config.tab_bar_at_bottom = true
 
