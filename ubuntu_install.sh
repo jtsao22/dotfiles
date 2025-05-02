@@ -105,6 +105,7 @@ stow --target=$HOME config
 stow --target=$HOME bash
 stow --target=$HOME inputrc
 stow --target=$HOME gdb
+stow --target=$HOME ideavim
 
 # Install usr_local_bin folder to /usr/local/bin
 sudo cp usr_local_bin/* /usr/local/bin
